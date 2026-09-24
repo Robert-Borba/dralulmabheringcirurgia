@@ -1,0 +1,63 @@
+/* Ajustes pedidos depois da conversao. Fica fora de style.css porque aquele
+   arquivo e regerado por tools/convert.py. */
+
+/* seta entre a hero e a secao seguinte: valor salvo no mobile era 45% do
+   container, o que a transformava num blob. Tamanho natural: 28x51. */
+.elementor-element-26592d82{width:28px!important;max-width:28px!important}
+.elementor-element-26592d82 img{width:28px!important}
+
+/* selo da garantia ao lado do texto (a caixa tinha 1140px com a imagem em 191px) */
+@media (min-width:768px){
+  .elementor-element-4e836d01{align-items:center}
+  .elementor-element-6b24ae76{flex:0 0 294px!important;width:294px!important;max-width:294px!important}
+  .elementor-element-6b24ae76 img{width:294px!important}
+  .elementor-element-5db34bf7{flex:0 1 560px!important;width:560px!important;max-width:560px!important;min-width:0}
+}
+
+/* cartao "Agora veja o resumo da 8a turma" centrado */
+.e-con .elementor-element-4b702357{margin-left:auto!important;margin-right:auto!important;align-self:center!important}
+
+/* bloco "Ainda com duvidas?": image-box centrado junto com o botao */
+.elementor-element-6609dc09,
+.elementor-element-6609dc09 .elementor-image-box-wrapper,
+.elementor-element-6609dc09 .elementor-image-box-content,
+.elementor-element-6609dc09 .elementor-image-box-img{text-align:center}
+
+/* selo do MEC na hero: acompanha o alinhamento centrado do resto do bloco
+   ate 1024px (o texto ao lado ja usa _flex_align_self_tablet: center) */
+@media (max-width:1024px){
+  .elementor-element-4b1ca2e8{align-self:center}
+  .elementor-element-4b1ca2e8 .elementor-widget-container{text-align:center}
+}
+
+/* selo da garantia no mobile: 40% maior (54% -> 75.6%) */
+@media (max-width:767px){
+  .elementor-element-6b24ae76{width:auto!important;max-width:100%!important}
+  .elementor-element-6b24ae76 img{width:200px!important;max-width:100%!important}
+}
+
+/* secao "E se voce achou caro": no mobile o texto subia por cima do homem
+   e o titulo quebrava deixando "e:" sozinho */
+@media (max-width:767px){
+  .elementor-element-244f6795{padding-top:330px!important}
+  .elementor-element-6f44aaf,
+  .elementor-element-23786c72{text-wrap:balance}
+}
+
+/* rodape: QR code do e-MEC e logo da Faculdade Focus removidos a pedido */
+.elementor-element-472bc43c,
+.elementor-element-27d06270{display:none!important}
+
+/* icone do Instagram centrado no mobile */
+@media (max-width:767px){
+  .elementor-element-7b40492b{align-items:center}
+  .elementor-element-5b7ed780{width:100%!important;max-width:100%!important;text-align:center}
+  .elementor-element-5b7ed780 .elementor-social-icons-wrapper{justify-content:center}
+}
+
+
+
+/* bloco da garantia: os dois textos estavam com align-self flex-start, entao o
+   conjunto ficava ancorado a esquerda do container mesmo com o texto centrado */
+.elementor-element-227e1112,
+.elementor-element-7ac984e3{width:100%!important;max-width:100%!important;align-self:stretch!important;text-align:center!important}
