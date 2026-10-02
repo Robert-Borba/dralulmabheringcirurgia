@@ -1824,9 +1824,22 @@
     /* celular: a foto 1 tem uma moldura preta de borda reta (esquerda e topo) que parecia um corte.
        Aproxima um pouco a foto: a moldura sai e o médico fica mais no centro. */
     @media (max-width: 767px) {
+      /* sem caixa: a foto some suave em todas as bordas e se funde no fundo da página (nada de borda reta) */
+      .faq-acc__media { border-radius: 0; }
+      .faq-acc__media::after { display: none; }
+      .faq-acc__img {
+        background: transparent;
+        /* as quatro bordas chegam a transparente exatamente na borda da caixa */
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+        -webkit-mask-composite: source-in;
+        mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+        mask-composite: intersect;
+      }
+      /* foto 1: o médico vem mais para o meio e a faixa de luz da porta (esquerda) some aos poucos */
       .faq-acc__img[src="faq 1.webp"] {
-        transform: scale(1.18);
-        transform-origin: 90% 50%;
+        transform: translateX(-9%);
+        -webkit-mask-image: linear-gradient(to right, transparent 8%, #000 38%, #000 84%, transparent), linear-gradient(to bottom, transparent 4%, #000 20%, #000 84%, transparent);
+        mask-image: linear-gradient(to right, transparent 8%, #000 38%, #000 84%, transparent), linear-gradient(to bottom, transparent 4%, #000 20%, #000 84%, transparent);
       }
     }
 
