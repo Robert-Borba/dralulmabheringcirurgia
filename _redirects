@@ -1,0 +1,4 @@
+# Mesmos redirecionamentos do site no ar (conferidos em 2026-10-02)
+/v1/* /pptpunchv1/ 301
+/v2/* /pv-ppt-formacaopczv1/ 301
+/links/* / 301
