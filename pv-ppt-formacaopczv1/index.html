@@ -527,12 +527,17 @@
       flex-direction: column;
       gap: 0.9rem;
       margin-bottom: 2rem;
+      /* o bloco fica no meio do cartão, mas os itens alinham pela esquerda (✓ um embaixo do outro) */
+      width: fit-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .mec__list li {
       display: flex;
       align-items: flex-start;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 0.6rem;
       font-size: clamp(0.82rem, 1.8vw, 0.92rem);
       line-height: 1.5;
