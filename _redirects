@@ -1,4 +1,7 @@
-# Mesmos redirecionamentos do site no ar (conferidos em 2026-10-02)
-/v1/* /pptpunchv1/ 301
-/v2/* /pv-ppt-formacaopczv1/ 301
+# Padrão de slugs do cliente (2026-10-02): /pv-ppt<produto>v<versão>.
+# Os endereços antigos continuam funcionando e levam as UTMs junto.
+/pv-ppt-formacaopczv1/* /pv-pptformacaopczv1/:splat 301
+/pptpunchv1/* /pv-pptbiopsiav1/:splat 301
+/v1/* /pv-pptbiopsiav1/ 301
+/v2/* /pv-pptformacaopczv1/ 301
 /links/* / 301

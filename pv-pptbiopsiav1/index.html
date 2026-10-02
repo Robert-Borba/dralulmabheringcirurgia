@@ -1815,5 +1815,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
   </script>
 
+<!-- UTMs até o checkout: copia os parâmetros da visita (utm_*, src, sck, xcod, fbclid, gclid) para os links do Hotmart.
+     Sem isso a venda chega sem utm_source e a regra pago/orgânico não funciona. Guarda na sessão para não perder ao rolar/voltar. -->
+<script>
+(function () {
+  var CHAVES = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'xcod', 'fbclid', 'gclid'];
+  var guardado = {};
+  try { guardado = JSON.parse(sessionStorage.getItem('lulma-utm') || '{}'); } catch (e) {}
+  var agora = new URLSearchParams(location.search);
+  CHAVES.forEach(function (k) { var v = agora.get(k); if (v) guardado[k] = v; });
+  try { sessionStorage.setItem('lulma-utm', JSON.stringify(guardado)); } catch (e) {}
+  function completar(a) {
+    try {
+      var u = new URL(a.href);
+      if (!/(^|\.)hotmart\.com$/.test(u.hostname)) return;
+      CHAVES.forEach(function (k) { if (guardado[k] && !u.searchParams.has(k)) u.searchParams.set(k, guardado[k]); });
+      a.href = u.toString();
+    } catch (e) {}
+  }
+  document.querySelectorAll('a[href*="hotmart.com"]').forEach(completar);
+  // garante também em link criado ou trocado depois (na hora do clique)
+  document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href*="hotmart.com"]'); if (a) completar(a); }, true);
+})();
+</script>
 </body>
 </html>
