@@ -723,6 +723,18 @@
       flex-shrink: 0;
     }
 
+    /* celular: os itens ficam um embaixo do outro, alinhados pela esquerda (ícones na mesma coluna) */
+    @media (max-width: 767px) {
+      .formacao-info__features {
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        max-width: 100%;
+      }
+      .formacao-info__feature { align-items: flex-start; }
+      .formacao-info__feature img { margin-top: 0.05rem; }
+    }
+
     .formacao-info__ctas {
       display: flex;
       flex-direction: column;
@@ -1806,6 +1818,15 @@
     @media (max-width: 767px) {
       .faq-acc__media::after {
         box-shadow: inset 0 0 48px 20px #060608;
+      }
+    }
+
+    /* celular: a foto 1 tem uma moldura preta de borda reta (esquerda e topo) que parecia um corte.
+       Aproxima um pouco a foto: a moldura sai e o médico fica mais no centro. */
+    @media (max-width: 767px) {
+      .faq-acc__img[src="faq 1.webp"] {
+        transform: scale(1.18);
+        transform-origin: 90% 50%;
       }
     }
 
