@@ -1825,7 +1825,7 @@
        Aproxima um pouco a foto: a moldura sai e o médico fica mais no centro. */
     @media (max-width: 767px) {
       /* sem caixa: a foto some suave em todas as bordas e se funde no fundo da página (nada de borda reta) */
-      .faq-acc__media { border-radius: 0; }
+      .faq-acc__media { border-radius: 0; overflow: hidden; }
       .faq-acc__media::after { display: none; }
       .faq-acc__img {
         background: transparent;
@@ -1837,9 +1837,11 @@
       }
       /* foto 1: o médico vem mais para o meio e a faixa de luz da porta (esquerda) some aos poucos */
       .faq-acc__img[src="faq 1.webp"] {
-        transform: translateX(-9%);
-        -webkit-mask-image: linear-gradient(to right, transparent 8%, #000 38%, #000 84%, transparent), linear-gradient(to bottom, transparent 4%, #000 20%, #000 84%, transparent);
-        mask-image: linear-gradient(to right, transparent 8%, #000 38%, #000 84%, transparent), linear-gradient(to bottom, transparent 4%, #000 20%, #000 84%, transparent);
+        /* amplia 1,32x: a faixa azul da porta (esquerda) e a moldura preta saem do quadro, o médico fica no centro */
+        transform: scale(1.32);
+        transform-origin: 100% 21%;
+        -webkit-mask-image: linear-gradient(to right, transparent 24%, #000 40%, #000 86%, transparent), linear-gradient(to bottom, transparent 5%, #000 18%, #000 64%, transparent 81%);
+        mask-image: linear-gradient(to right, transparent 24%, #000 40%, #000 86%, transparent), linear-gradient(to bottom, transparent 5%, #000 18%, #000 64%, transparent 81%);
       }
     }
 
