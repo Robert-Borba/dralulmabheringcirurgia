@@ -2689,8 +2689,9 @@
         order: -1;
         aspect-ratio: auto;
         height: min(52svh, 480px);
-        /* mesma foto do celular, enquadrada no rosto (sem o vazio escuro de cima) */
-        background: url('hero%20mobile.webp') center 92% / cover no-repeat;
+        /* mesma foto do celular (800x2015, o topo da cabeça fica em y=990):
+           a foto ocupa a largura e o topo da cabeça fica sempre 28px abaixo da faixa, em qualquer celular */
+        background: url('hero%20mobile.webp') center calc(28px - 123.75vw) / 100% auto no-repeat;
         /* a própria foto esmaece na base e emenda no fundo, sem linha de corte */
         -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 96%);
         mask-image: linear-gradient(to bottom, #000 50%, transparent 96%);
