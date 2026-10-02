@@ -2688,18 +2688,19 @@
       .hero__media {
         order: -1;
         aspect-ratio: auto;
-        height: min(54svh, 500px);
+        height: min(52svh, 480px);
         /* mesma foto do celular, enquadrada no rosto (sem o vazio escuro de cima) */
         background: url('hero%20mobile.webp') center 92% / cover no-repeat;
         /* a própria foto esmaece na base e emenda no fundo, sem linha de corte */
-        -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 96%);
+        mask-image: linear-gradient(to bottom, #000 50%, transparent 96%);
       }
       .hero__caption { display: none; }
       .hero__content {
         position: relative;
         z-index: 1;
-        margin: -2.25rem auto 0;
+        /* o texto sobe por cima do tronco (já esmaecido) da foto */
+        margin: -7.5rem auto 0;
         padding-top: 0;
       }
     }
