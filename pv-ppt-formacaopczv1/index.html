@@ -2677,6 +2677,32 @@
     @media (max-width: 767px) {
       .hero__photo-ghost { display: none; }
     }
+
+    /* ===== celular: a foto da Dra. vem primeiro (primeira dobra), o texto depois ===== */
+    @media (max-width: 767px) {
+      .hero {
+        background:
+          radial-gradient(ellipse 60% 70% at 82% 30%, rgba(199,164,103,0.16), transparent 60%),
+          linear-gradient(160deg, #101116 0%, #0A0A0D 55%, #060607 100%);
+      }
+      .hero__media {
+        order: -1;
+        aspect-ratio: auto;
+        height: min(54svh, 500px);
+        /* mesma foto do celular, enquadrada no rosto (sem o vazio escuro de cima) */
+        background: url('hero%20mobile.webp') center 92% / cover no-repeat;
+        /* a própria foto esmaece na base e emenda no fundo, sem linha de corte */
+        -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+      }
+      .hero__caption { display: none; }
+      .hero__content {
+        position: relative;
+        z-index: 1;
+        margin: -2.25rem auto 0;
+        padding-top: 0;
+      }
+    }
   </style>
 </head>
 <body>
