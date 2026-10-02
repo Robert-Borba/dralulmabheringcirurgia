@@ -1448,6 +1448,16 @@
       margin-bottom: 1.75rem;
     }
 
+    /* celular: sem o vão de cima (a seta só aparece no computador), selo no centro e botão centralizado */
+    @media (max-width: 767px) {
+      .guarantee { padding-top: 2.5rem; }
+      .guarantee__inner { gap: 1rem; }
+      /* o desenho do selo fica 4% à direita dentro do próprio arquivo: compensa para ficar no meio */
+      .guarantee__seal { width: 260px; margin: -1rem 0 -1.5rem; } /* o arquivo tem borda transparente em cima e embaixo */
+      .guarantee__seal img { transform: translateX(-4.3%); }
+      .guarantee__content .btn-cta { align-self: center; }
+    }
+
     @media (min-width: 768px) {
       .guarantee__inner {
         flex-direction: row;
