@@ -5,3 +5,4 @@
 /v1/* /pv-pptbiopsiav1/ 301
 /v2/* /pv-pptformacaopczv1/ 301
 /links/* / 301
+/cg-seguidores/* /cg-novoseguidores/:splat 301
