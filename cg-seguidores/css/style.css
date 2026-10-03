@@ -644,3 +644,23 @@ h3:before
       essa margem. */
 .elementor-element-64644c76 img,.elementor-element-196fafdf img{object-fit:cover}
 
+/* 7. Celular (pedidos do Mateus, 2026-10-03): barra do topo 4px menor; logo da
+      hero, textos da hero, "Para quem e este curso?", "FAQ" e bloco do WhatsApp centrados. */
+@media (max-width:767px){
+  .elementor-element-33b79854 .elementor-heading-title{font-size:18.5px}
+  .elementor-element-64644c76{align-self:center;text-align:center}
+  .elementor-element-78f187bb,.elementor-element-78f187bb .elementor-image-box-wrapper,
+  .elementor-element-b4953e,.elementor-element-b4953e .elementor-image-box-wrapper{text-align:center}
+  /* "< FAQ >": o h3 vira bloco so do tamanho do texto, assim as setas
+     acompanham a palavra no centro em vez de ficarem nas bordas */
+  .elementor-element-176780ee{text-align:center}
+  .elementor-element-176780ee .elementor-heading-title{display:inline-block}
+  /* linha do CRM (topo e rodape): quebra em 2 linhas no celular e a altura
+     de linha 1 deixava as linhas encostadas */
+  .elementor-element-6122e02 .elementor-heading-title,
+  .elementor-element-7bb11893 .elementor-heading-title{line-height:1.5}
+  /* "Ainda com duvidas?": icone do WhatsApp e textos centrados */
+  .elementor-element-7c380206,.elementor-element-7c380206 .elementor-image-box-wrapper{text-align:center}
+  .elementor-element-7c380206 .elementor-image-box-img img{margin:0 auto}
+}
+
