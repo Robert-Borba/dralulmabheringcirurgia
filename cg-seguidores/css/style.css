@@ -649,12 +649,13 @@ h3:before
 @media (max-width:767px){
   .elementor-element-33b79854 .elementor-heading-title{font-size:18.5px}
   .elementor-element-64644c76{align-self:center;text-align:center}
+  /* foto da Dra.: ela esta no lado direito da propria imagem de fundo (rosto a
+     ~70% da largura). Ampliando 170% com a borda direita encostada, o rosto
+     cai no centro; o conteudo desce para a logo nao cobrir o rosto. */
+  .elementor-element-f3de288{background-size:170% auto;background-position:right top}
+  .elementor-element-f3de288 > .e-con-inner{padding-top:78%}
   .elementor-element-78f187bb,.elementor-element-78f187bb .elementor-image-box-wrapper,
   .elementor-element-b4953e,.elementor-element-b4953e .elementor-image-box-wrapper{text-align:center}
-  /* "< FAQ >": o h3 vira bloco so do tamanho do texto, assim as setas
-     acompanham a palavra no centro em vez de ficarem nas bordas */
-  .elementor-element-176780ee{text-align:center}
-  .elementor-element-176780ee .elementor-heading-title{display:inline-block}
   /* linha do CRM (topo e rodape): quebra em 2 linhas no celular e a altura
      de linha 1 deixava as linhas encostadas */
   .elementor-element-6122e02 .elementor-heading-title,
@@ -663,4 +664,9 @@ h3:before
   .elementor-element-7c380206,.elementor-element-7c380206 .elementor-image-box-wrapper{text-align:center}
   .elementor-element-7c380206 .elementor-image-box-img img{margin:0 auto}
 }
+
+/* 8. "< FAQ >" centrado em todas as telas: o h3 vira bloco so do tamanho do
+      texto, assim as setas acompanham a palavra em vez de ficarem nas bordas. */
+.elementor-element-176780ee{text-align:center}
+.elementor-element-176780ee .elementor-heading-title{display:inline-block}
 
