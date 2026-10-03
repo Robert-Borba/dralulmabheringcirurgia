@@ -1,0 +1,646 @@
+/* Bookerly (titulos) hospedada aqui: nao existe no Google Fonts */
+@font-face{font-family:"Bookerly";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url('../fonts/bookerly.woff2') format('woff2')}
+
+*,*::before,*::after{box-sizing:border-box}
+/* overflow-x:clip e nao hidden: hidden transforma o body em area de rolagem
+   e a barra do topo (sticky) deixava de grudar */
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;font-family:"Nunito",sans-serif;background:#000;color:#F5F0EA;
+     overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block;border:0}
+a{color:inherit}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+h1,h2,h3,h4,h5,h6{margin:0;font-weight:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+/* --- containers: mesmas regras do frontend do Elementor --- */
+.e-con{position:relative;display:flex;flex-direction:column;min-width:0;
+  width:100%;max-width:100%;margin-inline:auto;
+  padding-left:10px;padding-right:10px;align-content:flex-start}
+.e-con-full{padding-top:10px;padding-bottom:10px;gap:20px}
+/* margin-inline:auto so atrapalha dentro de container em linha (row):
+   la a margem automatica engole o espaco livre e desalinha os itens.
+   Em coluna ela e o que centraliza o cartao, entao fica. */
+.elementor-element-4ccd82da > .e-con,.elementor-element-2dc7d196 > .e-con{margin-left:0;margin-right:0}
+.e-con-boxed{flex-direction:column;flex-wrap:nowrap;align-items:normal;
+  justify-content:normal;align-content:normal}
+.e-con>.e-con-inner{position:relative;z-index:1;display:flex;flex-direction:column;
+  min-width:0;width:100%;max-width:1140px;margin:0 auto;
+  padding-top:10px;padding-bottom:10px;gap:20px}
+.e-con.e-con>.e-con-inner>.elementor-widget,
+.elementor.elementor .e-con>.elementor-widget{max-width:100%}
+.e-con .elementor-widget{min-width:0}
+.e-con-overlay{position:absolute;inset:0;z-index:0;pointer-events:none}
+/* Abaixo de 768px o Elementor forca todo container a 100% e a quebrar linha
+   (@media max-width:767px -> .e-con.e-flex{--width:100%;--flex-wrap:wrap}).
+   E por isso que o mobile se comporta bem mesmo com larguras ruins no desktop. */
+@media (max-width:767px){
+  .e-con.e-con{width:100%;max-width:100%}
+  .e-con-full.e-con-full,.e-con.e-con>.e-con-inner{flex-wrap:wrap}
+}
+.elementor-element{min-width:0}
+.elementor-widget{width:100%}
+.elementor-widget-container{position:relative}
+
+/* --- imagem: no Elementor a imagem e centrada por padrao --- */
+.elementor-widget-image{text-align:center}
+.elementor-widget-image img{display:inline-block;vertical-align:middle}
+.elementor-widget-image a{display:inline-block}
+
+/* --- botao --- */
+.elementor-button-wrapper{display:block}
+.elementor-button{display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;border:0;cursor:pointer;line-height:1.2;
+  background:#69727d;color:#fff;padding:12px 24px;border-radius:3px;
+  font-size:15px;text-align:center}
+.elementor-button-content-wrapper{display:flex;align-items:center;gap:8px;
+  justify-content:center}
+.elementor-button-icon{display:inline-flex}
+.elementor-button-icon svg{width:1.1em;height:1.1em}
+
+/* --- lista de icones --- */
+.elementor-icon-list-items{display:flex;flex-direction:column}
+.elementor-icon-list-item{display:flex;align-items:flex-start;column-gap:10px;
+  text-align:left}
+.elementor-icon-list-icon{flex:0 0 auto;display:inline-flex;align-items:center;
+  justify-content:center;margin-top:.15em}
+.elementor-icon-list-icon img,.elementor-icon-list-icon svg{width:100%;height:100%}
+
+/* --- divisor --- */
+.elementor-divider{display:flex;width:100%;padding-block:15px}
+.elementor-divider-separator{display:block;width:100%;
+  border-top:1px solid #0c0d0e}
+
+/* --- image box --- */
+.elementor-image-box-wrapper{display:flex;flex-direction:column;gap:15px}
+.elementor-image-box-img img{display:inline-block}
+.elementor-image-box-title{margin:0 0 10px}
+.elementor-image-box-description{margin:0}
+
+/* --- icones sociais --- */
+.elementor-social-icons-wrapper{display:flex;flex-wrap:wrap;gap:10px}
+.elementor-social-icon{display:inline-flex;align-items:center;justify-content:center;
+  width:2em;height:2em;text-decoration:none}
+.elementor-social-icon svg{width:1em;height:1em}
+
+/* --- espacador / icone --- */
+.elementor-spacer-inner{height:50px}
+.elementor-icon{display:inline-flex;font-size:50px;line-height:1}
+.elementor-icon img,.elementor-icon svg{width:1em;height:1em}
+
+/* --- classes que vinham do CSS global do tema (recriadas) --- */
+/* .bronze nao vem no export; usa o mesmo degrade cobre da pagina (.gradiente-pv) */
+.bronze{background:linear-gradient(118deg,#D08A64 0%,#D9BCA5 60%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.semimagem .elementor-image-box-img{display:none}
+.pontas{position:relative}
+
+/* --- video do YouTube (fachada: o iframe so carrega no clique) --- */
+.video-yt{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer}
+.video-yt img{width:100%;height:100%;object-fit:cover}
+.video-yt-play{position:absolute;inset:0;margin:auto;width:68px;height:48px;padding:0;
+  background:none;border:0;cursor:pointer;transition:transform .2s ease}
+.video-yt:hover .video-yt-play{transform:scale(1.08)}
+.video-yt-play svg{width:100%;height:100%;display:block}
+.video-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* --- acordeao (FAQ) --- */
+.e-n-accordion{display:flex;flex-direction:column}
+.e-n-accordion-item-title{display:flex;align-items:center;justify-content:space-between;
+  gap:16px;cursor:pointer;list-style:none;padding:10px 15px}
+.e-n-accordion-item-title::-webkit-details-marker{display:none}
+.e-n-accordion-item-title-icon{position:relative;flex:0 0 14px;width:14px;height:14px}
+.e-n-accordion-item-title-icon::before,.e-n-accordion-item-title-icon::after{
+  content:"";position:absolute;left:0;top:6px;width:14px;height:2px;
+  background:currentColor;transition:transform .25s ease}
+.e-n-accordion-item-title-icon::after{transform:rotate(90deg)}
+.e-n-accordion-item[open] .e-n-accordion-item-title-icon::after{transform:rotate(0)}
+.e-n-accordion-item > .e-con{margin:0}
+
+
+/* ---- CSS da pagina (Elementor > Configuracoes da pagina) ---- */
+body{background-color:#030508}
+.gradiente-pv{
+    background: linear-gradient(118deg, #D08A64 0%, #D9BCA5 27.7%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: 700;
+}
+
+.pontas:after, .pontas:before{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/ponta.svg');
+    background-size: cover;
+}
+
+.pontas:after{
+    left: 0;
+    top: 0;
+}
+
+.pontas:before{
+    right: 0;
+    bottom: 0;
+    left: inherit;
+    top: inherit;
+    transform: rotate(180deg);
+}
+
+h3{
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1em;
+    background: linear-gradient(122deg, #D08A64 26.63%, #D9BCA5 86.34%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0 !important;
+    position: relative;
+    left: 25px;
+    margin-right: 50px !important;
+}
+
+h3:after, h3:before{
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-image: url('../img/borda-h3.svg');
+    background-size: cover;
+}
+
+h3:after{
+    left: -25px;
+    top: -4px;
+}
+
+h3:before{
+    right: -25px;
+    bottom: -4px;
+    transform: rotate(180deg);
+}
+
+.elementor .elementor-image-box-title{
+    margin-top: 0;
+}
+
+/** BOTÃO */
+
+.elementor .elementor-button {
+  position: relative;
+  z-index: 0;
+  background: radial-gradient(165.91% 647.63% at 45.92% -308.33%, #9E5333 0%, #BE7354 100%);
+}
+
+.elementor .elementor-button::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: #ffffff;
+  box-shadow: 0 0 30px 20px #ffffffaa;
+  transform: skewX(-30deg);
+  mix-blend-mode: plus-lighter;
+  animation: brilho 3s linear infinite;
+  z-index: -1;
+}
+
+.elementor .elementor-button:hover{
+    transform: scale(1.03);
+}
+
+@keyframes brilho {
+  0% {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.elementor-element-647b40f5{background-color:#7A7A7A;position:sticky;top:0;z-index:99}
+.elementor-element-647b40f5 > .e-con-inner{flex-direction:column}
+.elementor-element-33b79854{text-align:center;font-family:"Bookerly", sans-serif;font-weight:500;color:#FCFBF9}
+.elementor-element-f3de288{background-image:url('../img/bg-pv-lulma-25-copy.webp');background-position:center center;background-size:cover;min-height:809px;padding-left:0rem;padding-right:0rem}
+.elementor-element-f3de288 > .e-con-inner{flex-direction:column;justify-content:center;align-items:flex-start;gap:36px 36px;padding-top:0rem;padding-bottom:1rem}
+.elementor-element-64644c76{width:231px;max-width:231px}
+.elementor-element-64644c76 img{width:100%}
+.elementor-element-78f187bb{width:760px;max-width:760px;text-align:left}
+.elementor-element-78f187bb .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:3rem;font-weight:300;color:#FCFBF9}
+.elementor-element-78f187bb .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1.125rem;font-weight:300;color:#B9B9BA}
+.elementor-element-78f187bb .elementor-image-box-wrapper{gap:0px}
+.elementor-element-6122e02{text-align:center;font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1em;font-style:italic;color:#B9B9BA}
+.elementor-element-6c1a2d01 > .e-con-inner{flex-direction:column;justify-content:center;align-items:center;flex-wrap:wrap;gap:20px 20px;padding-top:8rem;padding-bottom:8rem}
+.elementor-element-6c1a2d01{padding-left:0rem;padding-right:0rem}
+.elementor-element-1ee30b9b > .elementor-widget-container{margin:-8px 0px 0px 0px}
+.elementor-element-1ee30b9b{width:300px;max-width:300px}
+.elementor-element-1ee30b9b img{width:100%}
+.elementor-element-b4953e > .elementor-widget-container{padding:0px 0px 50px 0px}
+.elementor-element-b4953e{width:625px;max-width:625px;text-align:center}
+.elementor-element-b4953e .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:2.3rem;font-weight:300;line-height:1.3em;color:#FCFBF9;margin-bottom:20px}
+.elementor-element-b4953e .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1.125rem;font-weight:300;color:#B9B9BA}
+.elementor-element-b4953e .elementor-image-box-wrapper{gap:0px}
+.elementor-element-4117cbef{margin:0px 0px 40px 0px;display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 40px;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px}
+.elementor-element-1eba173c > .elementor-widget-container{padding:2em 2em 2em 2em}
+.elementor-element-1eba173c{width:100%;max-width:100%;text-align:left}
+.elementor-element-1eba173c .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:1.5rem;font-weight:300;line-height:1.2em;color:#FCFBF9;margin-bottom:20px}
+.elementor-element-1eba173c .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em;color:#B9B9BA}
+.elementor-element-1eba173c .elementor-image-box-wrapper{gap:20px}
+.elementor-element-4c222653 > .elementor-widget-container{padding:2em 2em 2em 2em}
+.elementor-element-4c222653{width:100%;max-width:100%;text-align:left}
+.elementor-element-4c222653 .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:1.5rem;font-weight:300;line-height:1.2em;color:#FCFBF9;margin-bottom:20px}
+.elementor-element-4c222653 .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em;color:#B9B9BA}
+.elementor-element-4c222653 .elementor-image-box-wrapper{gap:20px}
+.elementor-element-479a2090 > .elementor-widget-container{padding:2em 2em 2em 2em}
+.elementor-element-479a2090{width:100%;max-width:100%;text-align:left}
+.elementor-element-479a2090 .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:1.5rem;font-weight:300;line-height:1.2em;color:#FCFBF9;margin-bottom:20px}
+.elementor-element-479a2090 .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em;color:#B9B9BA}
+.elementor-element-479a2090 .elementor-image-box-wrapper{gap:20px}
+.elementor-element-4ccd82da > .e-con-inner{flex-direction:row;justify-content:space-between;padding-top:8rem;padding-bottom:8rem}
+.elementor-element-4ccd82da{padding-left:0rem;padding-right:0rem}
+.elementor-element-305be309 > .elementor-widget-container{margin:-8px 0px 0px 0px}
+.elementor-element-305be309{width:300px;max-width:300px}
+.elementor-element-305be309 img{width:100%}
+.elementor-element-778b38a{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-7138ec2c{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-4a622746{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-4a622746 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-4a622746 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-65d4b3c4{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-640e2e2a{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-1cd5e917{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-1cd5e917 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-1cd5e917 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-6cb9d5c1{text-align:center}
+.elementor-element-6cb9d5c1 .elementor-button{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;line-height:1.2em;padding:0.9em 1.5em 0.9em 1.5em;background-color:#AB6946;color:#050505}
+.elementor-element-6d96cc56{text-align:center;font-family:"Inter", sans-serif;font-size:1rem;font-weight:200;line-height:1em;font-style:italic;color:#B9B9BA}
+.elementor-element-7ecb1d71{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-1c58aabd{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-f985c92{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-f985c92 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-f985c92 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-5c976bf8{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-33686df5{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-30b37620{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-30b37620 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-30b37620 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-5c1072c8{text-align:center}
+.elementor-element-5c1072c8 .elementor-button{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;line-height:1.2em;padding:0.9em 1.5em 0.9em 1.5em;background-color:#AB6946;color:#050505}
+.elementor-element-537bfc68{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-34286b6e{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-daae868{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-daae868 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-daae868 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-2e663094{text-align:center}
+.elementor-element-2e663094 .elementor-button{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;line-height:1.2em;padding:0.9em 1.5em 0.9em 1.5em;background-color:#AB6946;color:#050505}
+.elementor-element-5c38a7bb{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-10a80318{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-50bca36d{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-50bca36d .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-50bca36d .elementor-icon-list-items{row-gap:20px}
+.elementor-element-7162d5b7{text-align:center}
+.elementor-element-7162d5b7 .elementor-button{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;line-height:1.2em;padding:0.9em 1.5em 0.9em 1.5em;background-color:#AB6946;color:#050505}
+.elementor-element-3be40d6e{background-color:#0B182B;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:66px auto;gap:40px 40px;padding-left:50px;padding-right:50px;padding-top:50px;padding-bottom:50px}
+.elementor-element-347c6a9{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;color:#FCFBF9}
+.elementor-element-41b9b679{width:409px;max-width:409px;color:#B9B9BA}
+.elementor-element-41b9b679 .elementor-icon-list-text{font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1.5em}
+.elementor-element-41b9b679 .elementor-icon-list-items{row-gap:20px}
+.elementor-element-1e9b9982{text-align:center}
+.elementor-element-1e9b9982 .elementor-button{font-family:"Bookerly", sans-serif;font-size:1.3rem;font-weight:400;line-height:1.2em;padding:0.9em 1.5em 0.9em 1.5em;background-color:#AB6946;color:#050505}
+.elementor-element-2dc7d196{background-image:url('../img/bg-autoridade.webp');background-position:center center;background-size:cover;padding-left:0rem;padding-right:0rem}
+.elementor-element-2dc7d196 > .e-con-inner{flex-direction:row;gap:60px 60px;padding-top:8rem;padding-bottom:8rem}
+.elementor-element-4c4490cb{width:45%;max-width:45%}
+.elementor-element-4c4490cb img{width:100%}
+.elementor-element-663f93da{flex-direction:column;justify-content:center;align-items:flex-start;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px}
+.elementor-element-49183983{font-family:"Inter", sans-serif;font-size:1.2rem;font-weight:300;font-style:italic;color:#B9B9BA}
+.elementor-element-32fcf8b0{text-align:left}
+.elementor-element-32fcf8b0 .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:2.25rem;font-weight:400;line-height:1.1em;color:#FCFBF9}
+.elementor-element-32fcf8b0 .elementor-image-box-description{font-family:"Nunito", sans-serif;font-size:1rem;font-weight:400;line-height:1.3em;color:#B9B9BA}
+.elementor-element-2921152d > .e-con-inner{flex-direction:column}
+.elementor-element-5b80aeaf{background-color:#05080E;background-image:url('../img/bg-lulma.svg');background-repeat:repeat;background-position:center center;background-size:85px auto;padding-left:0rem;padding-right:0rem}
+.elementor-element-5b80aeaf > .e-con-inner{flex-direction:column;align-items:center;gap:40px 40px;padding-top:8rem;padding-bottom:8rem}
+.elementor-element-389e0a7c > .elementor-widget-container{margin:-8px 0px 0px 0px}
+.elementor-element-389e0a7c{width:300px;max-width:300px}
+.elementor-element-389e0a7c img{width:100%}
+.elementor-element-176780ee{font-family:"Inter", sans-serif;font-size:1.2rem;font-weight:300;font-style:italic;color:#B9B9BA}
+.elementor-element-67a370d6{width:410px;max-width:410px;text-align:center}
+.elementor-element-67a370d6 .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:2.3rem;font-weight:300;line-height:1.3em;color:#FCFBF9;margin-bottom:20px}
+.elementor-element-67a370d6 .elementor-image-box-description{font-family:"Inter", sans-serif;font-size:1.125rem;font-weight:300;color:#B9B9BA}
+.elementor-element-67a370d6 .elementor-image-box-wrapper{gap:0px}
+.elementor-element-c4475c4 .e-n-accordion-item-title .e-n-accordion-item-title-text{font-family:"Bookerly", sans-serif;font-size:1rem;font-weight:400}
+.elementor-element-c4475c4 .e-n-accordion-item-title{color:#FCFBF9;padding:1em 1em 1em 1em;border:0}
+.elementor-element-c4475c4 .e-n-accordion-item > .e-con{padding:1em 1em 1em 1em;border-style:solid;border-width:0px 0px 1px 0px;border-color:#7A7A7A96}
+.elementor-element-49f17995{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-1ce061e2{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-1056ca9a{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-78b966bb{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-6b2b2a9d{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-373ece56{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-52353db{font-family:"Inter", sans-serif;font-size:1rem;font-weight:400;line-height:1.5em}
+.elementor-element-7c380206 > .elementor-widget-container{margin:114px 0px 0px 0px}
+.elementor-element-7c380206{width:538px;max-width:538px}
+.elementor-element-7c380206 .elementor-image-box-title{font-family:"Bookerly", sans-serif;font-size:2rem;font-weight:400;color:#FCFBF9;margin-bottom:14px}
+.elementor-element-7c380206 .elementor-image-box-description{color:#B9B9BA}
+.elementor-element-7c380206 .elementor-image-box-wrapper{gap:7px}
+.elementor-element-154b37e6 .elementor-button{font-family:"Roboto", sans-serif;font-weight:800;background-color:#61CE70;color:#F5F0EA;box-shadow:0px 0px 10px 3px rgba(0,0,0,0.5)}
+.elementor-element-154b37e6 .elementor-button-content-wrapper{gap:0px}
+.elementor-element-196fafdf{width:231px;max-width:231px}
+.elementor-element-196fafdf img{width:100%}
+.elementor-element-7bb11893{text-align:center;font-family:"Inter", sans-serif;font-size:1rem;font-weight:300;line-height:1em;font-style:italic;color:#B9B9BA}
+
+@media (min-width:768px){
+.elementor-element-f3de288 > .e-con-inner{max-width:1300px}
+.elementor-element-6c1a2d01 > .e-con-inner{max-width:1300px}
+.elementor-element-4ccd82da > .e-con-inner{max-width:1060px}
+.elementor-element-778b38a{width:60%;max-width:60%}
+.elementor-element-65d4b3c4{width:60%;max-width:60%}
+.elementor-element-7ecb1d71{width:60%;max-width:60%}
+.elementor-element-5c976bf8{width:60%;max-width:60%}
+.elementor-element-537bfc68{width:60%;max-width:60%}
+.elementor-element-5c38a7bb{width:60%;max-width:60%}
+.elementor-element-3be40d6e{width:60%;max-width:60%}
+.elementor-element-2dc7d196 > .e-con-inner{max-width:1300px}
+.elementor-element-663f93da{width:45%;max-width:45%}
+.elementor-element-5b80aeaf{width:60%;max-width:60%}
+.elementor-element-5b80aeaf > .e-con-inner{max-width:845px}
+}
+
+@media (max-width:1366px){
+.elementor-element-1eba173c{width:100%;max-width:100%}
+.elementor-element-4c222653{width:100%;max-width:100%}
+.elementor-element-479a2090{width:100%;max-width:100%}
+}
+
+@media (max-width:1024px){
+.elementor-element-78f187bb{width:631px;max-width:631px}
+.elementor-element-4117cbef{grid-template-columns:repeat(1, 1fr)}
+.elementor-element-1eba173c{width:100%;max-width:100%}
+.elementor-element-4c222653{width:100%;max-width:100%}
+.elementor-element-479a2090{width:100%;max-width:100%}
+.elementor-element-2dc7d196 > .e-con-inner{flex-direction:column}
+.elementor-element-4c4490cb > .elementor-widget-container{margin:-170px 0px 0px 0px}
+.elementor-element-4c4490cb{z-index:2;width:100%;max-width:100%}
+.elementor-element-32fcf8b0 .elementor-image-box-title{font-size:2rem}
+}
+
+@media (max-width:1024px) and (min-width:768px){
+.elementor-element-f3de288 > .e-con-inner{max-width:90%}
+.elementor-element-6c1a2d01 > .e-con-inner{max-width:90%}
+.elementor-element-4ccd82da > .e-con-inner{max-width:90%}
+.elementor-element-2dc7d196 > .e-con-inner{max-width:90%}
+.elementor-element-663f93da{width:100%;max-width:100%}
+.elementor-element-5b80aeaf > .e-con-inner{max-width:90%}
+}
+
+@media (max-width:880px){
+.elementor-element-1eba173c{width:100%;max-width:100%}
+.elementor-element-4c222653{width:100%;max-width:100%}
+.elementor-element-479a2090{width:100%;max-width:100%}
+.elementor-element-4c4490cb{width:100%;max-width:100%}
+}
+
+@media (max-width:767px){
+.elementor-element-33b79854{width:100%;max-width:100%;align-self:center;text-align:center;font-size:15px}
+.elementor-element-f3de288{background-image:url('../img/bg-pv-lulma.webp');background-repeat:no-repeat;background-position:top center;background-size:100% auto;min-height:0px;padding-left:0;padding-right:0}
+.elementor-element-f3de288 > .e-con-inner{align-items:flex-start;padding-top:40%;padding-bottom:4rem;max-width:90%}
+.elementor-element-64644c76{text-align:start}
+.elementor-element-64644c76 img{width:72%;height:98px}
+.elementor-element-78f187bb{width:100%;max-width:100%}
+.elementor-element-78f187bb .elementor-image-box-title{font-size:clamp(1.3rem, 6.7vw, 2.5rem)}
+.elementor-element-78f187bb .elementor-image-box-description{font-size:1rem;line-height:1.5em}
+.elementor-element-6c1a2d01 > .e-con-inner{align-items:flex-start;padding-top:4rem;padding-bottom:0rem;max-width:90%}
+.elementor-element-6c1a2d01{padding-left:0rem;padding-right:0rem}
+.elementor-element-b4953e > .elementor-widget-container{padding:0px 0px 30px 0px}
+.elementor-element-b4953e{text-align:left}
+.elementor-element-b4953e .elementor-image-box-title{font-size:1.6rem}
+.elementor-element-b4953e .elementor-image-box-description{font-size:1rem}
+.elementor-element-4117cbef{gap:20px 20px}
+.elementor-element-1eba173c > .elementor-widget-container{padding:1em 1em 2em 1em}
+.elementor-element-1eba173c{width:100%;max-width:100%}
+.elementor-element-4c222653 > .elementor-widget-container{padding:1.5em 1em 2em 1em}
+.elementor-element-4c222653{width:100%;max-width:100%}
+.elementor-element-479a2090 > .elementor-widget-container{padding:1.5em 1em 2em 1em}
+.elementor-element-479a2090{width:100%;max-width:100%}
+.elementor-element-4ccd82da{padding-left:0rem;padding-right:0rem}
+.elementor-element-4ccd82da > .e-con-inner{padding-top:4rem;padding-bottom:4rem;max-width:90%}
+.elementor-element-778b38a{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-65d4b3c4{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-6cb9d5c1{width:100%;max-width:100%}
+.elementor-element-6cb9d5c1 .elementor-button{width:100%;font-size:clamp(0.5rem, 5.3vw, 1.3rem)}
+.elementor-element-7ecb1d71{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-5c976bf8{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-5c1072c8{width:100%;max-width:100%}
+.elementor-element-5c1072c8 .elementor-button{width:100%;font-size:clamp(0.5rem, 5.3vw, 1.3rem)}
+.elementor-element-537bfc68{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-2e663094{width:100%;max-width:100%}
+.elementor-element-2e663094 .elementor-button{width:100%;font-size:clamp(0.5rem, 5.3vw, 1.3rem)}
+.elementor-element-5c38a7bb{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-7162d5b7{width:100%;max-width:100%}
+.elementor-element-7162d5b7 .elementor-button{width:100%;font-size:clamp(0.5rem, 5.3vw, 1.3rem)}
+.elementor-element-3be40d6e{gap:20px 20px;padding-left:20px;padding-right:20px;padding-top:40px;padding-bottom:40px}
+.elementor-element-1e9b9982{width:100%;max-width:100%}
+.elementor-element-1e9b9982 .elementor-button{width:100%;font-size:clamp(0.5rem, 5.3vw, 1.3rem)}
+.elementor-element-2dc7d196{padding-left:0rem;padding-right:0rem}
+.elementor-element-2dc7d196 > .e-con-inner{padding-top:4rem;padding-bottom:4rem;max-width:90%}
+.elementor-element-4c4490cb > .elementor-widget-container{margin:-77px 0px 0px 0px}
+.elementor-element-4c4490cb{width:100%;max-width:100%}
+.elementor-element-32fcf8b0 .elementor-image-box-title{font-size:1.9rem}
+.elementor-element-5b80aeaf{padding-left:0rem;padding-right:0rem}
+.elementor-element-5b80aeaf > .e-con-inner{padding-top:4rem;padding-bottom:4rem;max-width:90%}
+.elementor-element-67a370d6 .elementor-image-box-title{font-size:1.6rem}
+.elementor-element-7c380206 > .elementor-widget-container{padding:0px 0px 0px 0px;margin:50px 0px 0px 0px}
+.elementor-element-154b37e6 > .elementor-widget-container{padding:1px 1px 1px 1px}
+.elementor-element-154b37e6{width:100%;max-width:100%;text-align:center}
+.elementor-element-154b37e6 .elementor-button{font-size:14px;letter-spacing:0.8px;padding:18px 18px 18px 18px;border-radius:5px 5px 5px 5px}
+.elementor-element-196fafdf{text-align:center}
+.elementor-element-196fafdf img{width:72%;height:98px}
+}
+
+/* ---- CSS personalizado por elemento (Elementor) ---- */
+
+.elementor-element-78f187bb .elementor-image-box-img img{
+    width: 100%;
+}
+
+.elementor-element-1ee30b9b {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translatex(-50%);
+}
+
+h3:before
+
+.elementor-element-4117cbef .elementor-image-box-img img{
+    width: 100%
+}
+
+.elementor-element-305be309 {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translatex(-50%);
+}
+
+.elementor-element-6cb9d5c1 {
+    overflow: hidden;
+}
+
+.elementor-element-5c1072c8 {
+    overflow: hidden;
+}
+
+.elementor-element-2e663094 {
+    overflow: hidden;
+}
+
+.elementor-element-7162d5b7 {
+    overflow: hidden;
+}
+
+.elementor-element-1e9b9982 {
+    overflow: hidden;
+}
+
+.elementor-element-32fcf8b0 .parag{
+    display: block;
+}
+
+.elementor-element-32fcf8b0 .parag:not(:last-child){
+    margin-bottom: 1em;
+}
+
+.elementor-element-32fcf8b0 .parag:last-child{
+    color: #D08A64;
+    font-weight: 700;
+}
+
+.elementor-element-32fcf8b0 .marrom-md{
+    font-weight: 700;
+}
+
+.elementor-element-2921152d{
+    display: none;
+    position: absolute;
+}
+
+.elementor-element-5b80aeaf:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(to bottom, #030508 0%, transparent 40%, transparent 60%, #030508);
+}
+
+.elementor-element-389e0a7c {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translatex(-50%);
+}
+
+h3:before
+
+.elementor-element-154b37e6 {
+    overflow: hidden;
+}
+
+/** BOTÃO */
+
+.elementor-element-154b37e6 .elementor-button {
+  position: relative;
+  z-index: 0;
+  background: radial-gradient(165.91% 647.63% at 45.92% -308.33%, #3BAE4B 0%, #61CE70 100%);
+  transition: transform 0.3s ease;
+}
+
+.elementor-element-154b37e6 .elementor-button::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: #ffffff;
+  box-shadow: 0 0 30px 20px #ffffffaa;
+  transform: skewX(-30deg);
+  mix-blend-mode: plus-lighter;
+  animation: brilho 3s linear infinite;
+  z-index: -1;
+}
+
+.elementor-element-154b37e6 .elementor-button:hover {
+    transform: scale(1.03);
+}
+
+/* ================= CORRECAO DO DESKTOP ================= */
+/* Lido por tools/convert.py e colado no fim de css/style.css.
+   Tudo aqui corrige o que so quebrava acima de 768px (o Elementor ignora
+   larguras e direcao de linha dos containers no celular). */
+
+@media (min-width:768px){
+  /* 1. Hero: o conteudo ficava grudado no topo e sobrava um vao embaixo. A
+        altura minima (809px) passa a valer para a coluna interna, entao o
+        "justify-content:center" salvo no Elementor finalmente centraliza. */
+  .elementor-element-f3de288 > .e-con-inner{min-height:809px}
+  .elementor-element-78f187bb .elementor-image-box-description{line-height:1.5}
+  /* linha do CRM: centrada nos 1300px ela caia no meio da tela, longe do
+     texto. Fica alinhada com o bloco de texto. */
+  .elementor-element-6122e02{text-align:left}
+
+  /* 2. Aulas: o container era uma LINHA sem quebra com 7 cartoes de 60%
+        cada. No celular o Elementor forca coluna, por isso so o desktop
+        quebrava. Vira uma coluna de cartoes centrados, um embaixo do outro. */
+  .elementor-element-4ccd82da > .e-con-inner{flex-direction:column;align-items:center;gap:40px}
+  .elementor-element-4ccd82da > .e-con-inner > .e-con{width:100%;max-width:760px}
+  /* texto da aula travado em 409px: acompanha a largura do cartao */
+  .elementor-element-4a622746,.elementor-element-1cd5e917,.elementor-element-f985c92,
+  .elementor-element-30b37620,.elementor-element-daae868,.elementor-element-50bca36d,
+  .elementor-element-41b9b679{width:100%;max-width:100%}
+
+  /* 3. FAQ: a secao tinha width:60%, um painel solto no meio da tela. Volta a
+        ocupar a largura toda; o conteudo continua na coluna de 845px. */
+  .elementor-element-5b80aeaf{width:100%;max-width:100%}
+  /* "Ainda com duvidas?" e o botao do WhatsApp ficavam desencontrados
+     (um com 538px a esquerda, o outro solto). Centrados juntos. */
+  .elementor-element-7c380206{align-self:center}
+  .elementor-element-7c380206,.elementor-element-7c380206 .elementor-image-box-wrapper{text-align:center}
+  .elementor-element-7c380206 .elementor-image-box-img img{margin:0 auto}
+  /* botao: so tinha medidas de celular; acima disso caia no padrao (15px, sem respiro) */
+  .elementor-element-154b37e6{text-align:center}
+  .elementor-element-154b37e6 .elementor-button{font-size:15px;letter-spacing:.8px;padding:20px 36px;border-radius:5px}
+}
+
+/* 4. Mentora: no tablet a foto vira bloco de cima e sobe 170px por cima do
+      fundo; acima de 1025px fica ao lado do texto. */
+@media (min-width:1025px){
+  .elementor-element-2dc7d196 > .e-con-inner{align-items:center}
+}
+
+/* 5. Botoes: o brilho animado (::before com sombra de 30px) vazava para fora
+      do botao; o Elementor so cortava no widget. */
+.elementor-button{overflow:hidden}
+
+/* 6. Logo: no celular a imagem tem altura fixa de 98px sem "object-fit", o que
+      achatava as letras. O PNG tem margem transparente, entao "cover" so corta
+      essa margem. */
+.elementor-element-64644c76 img,.elementor-element-196fafdf img{object-fit:cover}
+
