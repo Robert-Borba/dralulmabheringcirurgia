@@ -2634,7 +2634,10 @@
         min-height: 100svh;
         background:
           radial-gradient(ellipse 60% 70% at 82% 30%, rgba(199,164,103,0.16), transparent 60%),
-          url('hero%20desk.webp') center right / cover no-repeat,
+          /* A foto cresce no máximo até 62% da largura: com "cover", numa tela de 1280px a hero alta
+             esticava a foto e o rosto ia parar atrás do título. Abaixo disso, a foto some no fundo. */
+          linear-gradient(to bottom, transparent calc(62vw - 180px), #0A0A0D 62vw),
+          url('hero%20desk.webp') right top / auto clamp(42.2vw, 100%, 62vw) no-repeat,
           linear-gradient(160deg, #101116 0%, #0A0A0D 55%, #060607 100%);
       }
       .hero__inner {
