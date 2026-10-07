@@ -406,6 +406,7 @@ strong,b{color:var(--text);font-weight:700}
 .gal{--w:230px;--h:350px;--g:18px;margin-top:clamp(56px,7vw,88px);overflow:hidden;padding:6px 0 34px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .gal__track{display:flex;gap:var(--g);width:max-content;animation:marquee 55s linear infinite}
 @keyframes marquee{to{transform:translateX(calc(-50% - var(--g) / 2))}}
+.gal--top{margin:0 0 clamp(48px,6vw,80px)}
 .gal__it{width:var(--w);height:var(--h);flex-shrink:0}
 .gal__it:nth-child(even){transform:translateY(26px)}
 
@@ -731,27 +732,6 @@ strong,b{color:var(--text);font-weight:700}
       </div>
     </div>
   </div>
-  <div class="gal" data-rv="fade">
-    <div class="gal__track">
-      <figure class="gal__it ph"><img src="galeria-5.webp" alt="Dra. Lulma Bhering em procedimento" width="720" height="960" loading="lazy" style="object-position:50% 45%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-2.webp" alt="Centro cirúrgico com a equipe" width="720" height="1280" loading="lazy" style="object-position:50% 60%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-7.webp" alt="Lesão marcada antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-6.webp" alt="Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:62% 35%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-3.webp" alt="Alunos em campo com a Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-8.webp" alt="Procedimento no consultório" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-4.webp" alt="Dra. Lulma Bhering operando" width="720" height="1280" loading="lazy" style="object-position:45% 40%" /></figure>
-      <figure class="gal__it ph"><img src="galeria-1.webp" alt="Marcação antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
-      <!-- cópia para o loop sem emenda -->
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-5.webp" alt="" width="720" height="960" loading="lazy" style="object-position:50% 45%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-2.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 60%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-7.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-6.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:62% 35%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-3.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-8.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-4.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:45% 40%" /></figure>
-      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-1.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
-    </div>
-  </div>
 </section>
 
 <!-- ============ BÔNUS ============ -->
@@ -818,6 +798,27 @@ strong,b{color:var(--text);font-weight:700}
 
 <!-- ============ PRESENCIAL COMPLETA ============ -->
 <section class="sec sec--grid" id="completa">
+  <div class="gal gal--top" data-rv="fade">
+    <div class="gal__track">
+      <figure class="gal__it ph"><img src="galeria-5.webp" alt="Dra. Lulma Bhering em procedimento" width="720" height="960" loading="lazy" style="object-position:50% 45%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-2.webp" alt="Centro cirúrgico com a equipe" width="720" height="1280" loading="lazy" style="object-position:50% 60%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-7.webp" alt="Lesão marcada antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-6.webp" alt="Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:62% 35%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-3.webp" alt="Alunos em campo com a Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-8.webp" alt="Procedimento no consultório" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-4.webp" alt="Dra. Lulma Bhering operando" width="720" height="1280" loading="lazy" style="object-position:45% 40%" /></figure>
+      <figure class="gal__it ph"><img src="galeria-1.webp" alt="Marcação antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
+      <!-- cópia para o loop sem emenda -->
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-5.webp" alt="" width="720" height="960" loading="lazy" style="object-position:50% 45%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-2.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 60%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-7.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-6.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:62% 35%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-3.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 55%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-8.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-4.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:45% 40%" /></figure>
+      <figure class="gal__it ph" aria-hidden="true"><img src="galeria-1.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 45%" /></figure>
+    </div>
+  </div>
   <div class="wrap">
     <div class="complete-text center">
       <h2 class="h2 h2--caps" data-rv>O PRESENCIAL NÃO SUBSTITUI O <span class="nw">ON-LINE.</span> <span class="gold-text">ELE COMPLETA.</span></h2>
