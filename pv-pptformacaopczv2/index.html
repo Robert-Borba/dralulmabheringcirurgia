@@ -546,8 +546,9 @@ strong,b{color:var(--text);font-weight:700}
   .msg__ava,.typing img{width:34px;height:34px}
   .chat__you{display:none}
   .hero{min-height:0;align-items:flex-start;padding:20px 0 0;flex-direction:column}
-  .hero::before{background:linear-gradient(180deg,rgba(8,11,24,.94) 0%,rgba(8,11,24,.86) 55%,rgba(8,11,24,.45) 80%,var(--bg) 100%)}
-  .hero__wall{inset:-10% -40%}
+  .hero{background:var(--bg)}
+  .hero::before{background:linear-gradient(180deg,rgba(8,11,24,.55) 0%,rgba(8,11,24,.7) 260px,var(--bg) 430px)}
+  .hero__wall{inset:0 -12% auto;height:430px;transform:none;-webkit-mask-image:linear-gradient(180deg,#000 45%,transparent 100%);mask-image:linear-gradient(180deg,#000 45%,transparent 100%)}
   .wall__col:nth-child(n+4){display:none}
   .hero__dra{position:relative;right:auto;bottom:auto;height:auto;width:min(300px,78%);margin:0 auto -160px;z-index:0;order:-1}
   .hero__dra img{-webkit-mask-image:linear-gradient(180deg,#000 42%,transparent 84%);mask-image:linear-gradient(180deg,#000 42%,transparent 84%)}
