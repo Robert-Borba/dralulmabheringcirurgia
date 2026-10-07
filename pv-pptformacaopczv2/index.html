@@ -126,8 +126,6 @@ strong,b{color:var(--text);font-weight:700}
 .hero__dra{position:absolute;z-index:-1;bottom:0;right:max(-40px,calc(50% - 700px));height:min(92%,860px);aspect-ratio:1000/1204;pointer-events:none}
 .hero__dra::before{content:"";position:absolute;left:8%;right:8%;top:6%;bottom:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(199,164,103,.42),rgba(199,164,103,.12) 55%,transparent 75%);filter:blur(12px);animation:pulse 5s ease-in-out infinite}
 .hero__dra img{position:relative;width:100%;height:100%;object-fit:contain;object-position:bottom;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 97%),linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,#000 62%,transparent 97%),linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-composite:intersect;filter:drop-shadow(0 20px 50px rgba(0,0,0,.55))}
-.hero__beam{position:absolute;top:-20%;left:56%;width:2px;height:140%;background:linear-gradient(180deg,transparent,rgba(235,195,160,.9),transparent);transform:rotate(14deg);filter:blur(.5px);box-shadow:0 0 22px 4px rgba(206,156,126,.35);animation:beam 6s ease-in-out infinite;pointer-events:none}
-@keyframes beam{0%,100%{opacity:.25;transform:rotate(14deg) translateY(-6%)}50%{opacity:.9;transform:rotate(14deg) translateY(6%)}}
 .hero__in{position:relative;z-index:1;width:100%}
 .hero__content{max-width:610px}
 .hero__logo{width:150px;height:auto;margin-bottom:28px}
@@ -551,8 +549,7 @@ strong,b{color:var(--text);font-weight:700}
   .hero__wall{inset:-10% -40%}
   .wall__col:nth-child(n+4){display:none}
   .hero__dra{position:relative;right:auto;bottom:auto;height:auto;width:min(420px,100%);margin:28px auto 0;z-index:0}
-  .hero__beam{left:80%;top:40%;height:70%}
-  .hero__logo{width:120px;margin-bottom:22px}
+    .hero__logo{width:120px;margin-bottom:22px}
   .ctas{align-items:stretch}
   .final .ctas{align-items:stretch}
   .ctas .btn{min-width:0;padding:1rem .7rem;letter-spacing:.01em;font-size:min(.8rem,3.35vw)}
@@ -621,7 +618,6 @@ strong,b{color:var(--text);font-weight:700}
     <div class="wall__col"><div class="wall__track"><img src="galeria-4.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-4.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /></div></div>
     <div class="wall__col"><div class="wall__track"><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /></div></div>
   </div>
-  <div class="hero__beam" aria-hidden="true"></div>
   <div class="wrap hero__in">
     <div class="hero__content">
       <img class="hero__logo" src="logo.webp" alt="Formação On-line Pequenas Cirurgias do Zero" width="373" height="166" data-rv="fade" />
