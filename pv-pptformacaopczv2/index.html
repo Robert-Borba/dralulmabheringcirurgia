@@ -526,6 +526,9 @@ strong,b{color:var(--text);font-weight:700}
   .story .vid{max-width:300px;margin:0 auto}
 }
 @media (max-width:767px){
+  .btn{white-space:nowrap;letter-spacing:.01em;padding-left:.8rem;padding-right:.8rem;width:100%;min-width:0}
+  .story__text{text-align:center}
+  .story__num{justify-content:center}
   .bubbles{max-width:100%}
   .bubble--me{max-width:100%}
   .msg__ava,.typing img{width:34px;height:34px}
@@ -1185,6 +1188,21 @@ strong,b{color:var(--text);font-weight:700}
       }
     });
   });
+})();
+
+/* Celular: todo botão com o texto em 1 linha; a letra diminui até caber */
+(function () {
+  function caber() {
+    document.querySelectorAll('.btn').forEach(function (b) {
+      b.style.fontSize = '';
+      if (innerWidth >= 768) return;
+      var f = parseFloat(getComputedStyle(b).fontSize);
+      while (b.scrollWidth > b.clientWidth && f > 9) { f -= .25; b.style.fontSize = f + 'px'; }
+    });
+  }
+  caber();
+  addEventListener('resize', caber);
+  if (document.fonts) document.fonts.ready.then(caber);
 })();
 
 /* Botões com link ainda não enviado: não pulam pro topo */
