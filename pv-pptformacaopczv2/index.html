@@ -463,6 +463,33 @@ strong,b{color:var(--text);font-weight:700}
 .fm .inside .play .ico{width:15px;height:15px;margin-left:2px}
 .fm .inside .btn{margin-top:1rem}
 
+/* ---------- obrigatório: conversa ---------- */
+.chat{max-width:820px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#121A31,#0B0F1F);border:1px solid var(--line-gold);box-shadow:0 40px 90px -40px rgba(0,0,0,.95),0 0 60px -20px rgba(199,164,103,.25)}
+.chat__head{display:flex;align-items:center;gap:14px;padding:16px 22px;background:rgba(255,255,255,.035);border-bottom:1px solid var(--line)}
+.chat__head b{display:block;font-size:1rem}
+.chat__head small{display:block;color:var(--muted);font-size:.82rem}
+.chat__ava{position:relative;width:48px;height:48px;flex-shrink:0}
+.chat__ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.chat__on{position:absolute;right:0;bottom:1px;width:12px;height:12px;border-radius:50%;background:#3BE07F;border:2px solid #121A31}
+.chat__body{display:flex;flex-direction:column;gap:18px;padding:clamp(22px,4vw,40px);background-image:radial-gradient(rgba(199,164,103,.07) 1px,transparent 1px);background-size:18px 18px}
+.msg{display:flex;align-items:flex-end;gap:12px}
+.msg--me{justify-content:flex-end}
+.chat__you{width:38px;height:38px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--muted)}
+.chat__you .ico{width:18px;height:18px}
+.msg__ava{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold);box-shadow:0 0 18px rgba(199,164,103,.35)}
+.bubbles{display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:86%}
+.bubble{position:relative;padding:14px 18px;border-radius:20px 20px 20px 6px;background:#1B2440;border:1px solid rgba(255,255,255,.06);color:#DDD7CB;font-size:1rem;line-height:1.6}
+.bubble b{color:var(--gold-hi)}
+.bubble--me{max-width:80%;border-radius:20px 20px 6px 20px;background:linear-gradient(160deg,#2B3354,#1F2745);border-color:rgba(199,164,103,.25)}
+.bubble--me .ask__q{font-size:clamp(1.05rem,.9rem + .7vw,1.4rem);line-height:1.35;text-align:left}
+.bubble--gold{background:var(--gold-grad);color:#1d1405;font-weight:800;font-size:1.15rem;border:0}
+.typing{display:flex;align-items:flex-end;gap:12px}
+.typing img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);opacity:.85}
+.typing span{display:flex;gap:5px;padding:14px 18px;border-radius:20px 20px 20px 6px;background:#1B2440}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--gold-hi);animation:dots 1.2s ease-in-out infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dots{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
   .prod__side .side-ph{min-height:240px}
@@ -498,6 +525,10 @@ strong,b{color:var(--text);font-weight:700}
   .story .vid{max-width:300px;margin:0 auto}
 }
 @media (max-width:767px){
+  .bubbles{max-width:100%}
+  .bubble--me{max-width:100%}
+  .msg__ava,.typing img{width:34px;height:34px}
+  .chat__you{display:none}
   .hero{background:#0A0E1E url(hero-mobile.webp) center bottom/100% auto no-repeat;min-height:0;align-items:flex-start;padding:40px 0 calc(122vw)}
   .hero::before{background:linear-gradient(180deg,rgba(9,13,28,.2) 0%,transparent 40%),linear-gradient(0deg,var(--bg) 0%,transparent 14%)}
   .hero__beam{left:80%;top:40%;height:70%}
@@ -901,11 +932,26 @@ strong,b{color:var(--text);font-weight:700}
 <!-- ============ OBRIGATÓRIO? ============ -->
 <section class="sec sec--grid" id="obrigatorio">
   <div class="wrap">
-    <div class="ask corners" data-rv="zoom">
-      <h2 class="ask__q" data-rv style="--d:1">“DRA. LULMA, MAS O PRESENCIAL É OBRIGATÓRIO?”</h2>
-      <span class="ask__a" data-rv style="--d:2">Não é obrigatório.</span>
-      <p data-rv style="--d:3">Você pode entrar apenas para a Formação <span class="nw">On-line</span> e construir seu caminho através do método ETA, onde disponibilizo mais de 250 aulas. O presencial é uma oportunidade adicional para quem <b>PRECISA APLICAR NO PACIENTE REAL FISICAMENTE.</b></p>
-      <p data-rv style="--d:4">E quem é aluno do <span class="nw">on-line</span> tem prioridade na vaga do presencial, e ainda tem uma condição mais acessível, ou seja, no futuro você pode se matricular.</p>
+    <div class="chat">
+      <div class="chat__head" data-rv="fade">
+        <span class="chat__ava"><img src="avatar-dra.webp" alt="Dra. Lulma Bhering" width="420" height="420" loading="lazy" /><i class="chat__on"></i></span>
+        <span><b>Dra. Lulma Bhering</b><small>Cirurgiã Geral</small></span>
+      </div>
+      <div class="chat__body">
+        <div class="msg msg--me" data-rv="right" style="--d:1">
+          <div class="bubble bubble--me"><h2 class="ask__q">“DRA. LULMA, MAS O PRESENCIAL É OBRIGATÓRIO?”</h2></div>
+          <span class="chat__you" aria-hidden="true"><svg class="ico"><use href="#i-user"/></svg></span>
+        </div>
+        <div class="typing" data-rv="fade" style="--d:3" aria-hidden="true"><img src="avatar-dra.webp" alt="" width="420" height="420" loading="lazy" /><span><i></i><i></i><i></i></span></div>
+        <div class="msg msg--dra" data-rv="left" style="--d:5">
+          <img class="msg__ava" src="avatar-dra.webp" alt="" width="420" height="420" loading="lazy" />
+          <div class="bubbles">
+            <div class="bubble bubble--gold">Não é obrigatório.</div>
+            <div class="bubble"><p>Você pode entrar apenas para a Formação <span class="nw">On-line</span> e construir seu caminho através do método ETA, onde disponibilizo mais de 250 aulas. O presencial é uma oportunidade adicional para quem <b>PRECISA APLICAR NO PACIENTE REAL FISICAMENTE.</b></p></div>
+            <div class="bubble"><p>E quem é aluno do <span class="nw">on-line</span> tem prioridade na vaga do presencial, e ainda tem uma condição mais acessível, ou seja, no futuro você pode se matricular.</p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
