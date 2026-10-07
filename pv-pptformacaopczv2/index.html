@@ -15,8 +15,7 @@
 <meta property="og:title" content="Formação On-line e Presencial Pequenas Cirurgias do Zero" />
 <meta property="og:description" content="Estude a teoria, entenda a técnica, assista aos procedimentos quantas vezes precisar e depois aplique no paciente real presencialmente." />
 <meta property="og:locale" content="pt_BR" />
-<link rel="preload" as="image" href="hero-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-<link rel="preload" as="image" href="hero-desk.webp" media="(min-width: 768px)" fetchpriority="high" />
+<link rel="preload" as="image" href="dra-recorte.webp" fetchpriority="high" />
 <link rel="preload" as="font" type="font/woff2" href="fonts/inter.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="fonts/playfair.woff2" crossorigin />
 <style>
@@ -112,8 +111,21 @@ strong,b{color:var(--text);font-weight:700}
 .topbar::after{content:"";position:absolute;top:0;left:-40%;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 5s ease-in-out infinite}
 
 /* ---------- hero ---------- */
-.hero{position:relative;background:#0A0E1E url(hero-desk.webp) 30% center/cover no-repeat;min-height:min(94vh,920px);display:flex;align-items:center;padding:64px 0 84px;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,13,28,.96) 0%,rgba(9,13,28,.82) 38%,rgba(9,13,28,.25) 62%,transparent 78%),linear-gradient(0deg,var(--bg) 0%,transparent 22%);pointer-events:none}
+.hero{position:relative;isolation:isolate;background:#0A0E1E;min-height:min(94vh,920px);display:flex;align-items:center;padding:64px 0 84px;overflow:hidden}
+/* mural de fotos ao fundo: colunas que sobem e descem sozinhas */
+.hero__wall{position:absolute;inset:-25% -10%;display:flex;gap:14px;transform:rotate(-8deg);z-index:-3;filter:saturate(.55) brightness(.62);pointer-events:none}
+.wall__col{flex:1;min-width:0;overflow:hidden}
+.wall__track{display:flex;flex-direction:column;gap:14px;animation:wallup 80s linear infinite}
+.wall__col:nth-child(even) .wall__track{animation-name:walldown;animation-duration:95s}
+.wall__col:nth-child(3) .wall__track{animation-duration:70s}
+.wall__track img{width:100%;aspect-ratio:9/14;object-fit:cover;border-radius:16px;display:block}
+@keyframes wallup{to{transform:translateY(calc(-50% - 7px))}}
+@keyframes walldown{from{transform:translateY(calc(-50% - 7px))}to{transform:translateY(0)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(8,11,24,.97) 0%,rgba(8,11,24,.9) 36%,rgba(8,11,24,.6) 62%,rgba(8,11,24,.55) 100%),linear-gradient(0deg,var(--bg) 0%,transparent 24%),linear-gradient(180deg,rgba(8,11,24,.8) 0%,transparent 18%);pointer-events:none}
+/* a Dra. em primeiro plano, solta (sem moldura); base e laterais se dissolvem no fundo */
+.hero__dra{position:absolute;z-index:-1;bottom:0;right:max(-40px,calc(50% - 700px));height:min(92%,860px);aspect-ratio:1000/1204;pointer-events:none}
+.hero__dra::before{content:"";position:absolute;left:8%;right:8%;top:6%;bottom:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(199,164,103,.42),rgba(199,164,103,.12) 55%,transparent 75%);filter:blur(12px);animation:pulse 5s ease-in-out infinite}
+.hero__dra img{position:relative;width:100%;height:100%;object-fit:contain;object-position:bottom;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 97%),linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,#000 62%,transparent 97%),linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-composite:intersect;filter:drop-shadow(0 20px 50px rgba(0,0,0,.55))}
 .hero__beam{position:absolute;top:-20%;left:56%;width:2px;height:140%;background:linear-gradient(180deg,transparent,rgba(235,195,160,.9),transparent);transform:rotate(14deg);filter:blur(.5px);box-shadow:0 0 22px 4px rgba(206,156,126,.35);animation:beam 6s ease-in-out infinite;pointer-events:none}
 @keyframes beam{0%,100%{opacity:.25;transform:rotate(14deg) translateY(-6%)}50%{opacity:.9;transform:rotate(14deg) translateY(6%)}}
 .hero__in{position:relative;z-index:1;width:100%}
@@ -493,6 +505,7 @@ strong,b{color:var(--text);font-weight:700}
 
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
+  .hero__dra{right:-140px;height:78%;opacity:.95}
   .prod__side .side-ph{min-height:240px}
   .prod--mec{grid-template-columns:170px 1fr}
   .prod--mec .prod__body{grid-column:2;grid-row:1 / span 2}
@@ -533,8 +546,11 @@ strong,b{color:var(--text);font-weight:700}
   .bubble--me{max-width:100%}
   .msg__ava,.typing img{width:34px;height:34px}
   .chat__you{display:none}
-  .hero{background:#0A0E1E url(hero-mobile.webp) center bottom/100% auto no-repeat;min-height:0;align-items:flex-start;padding:40px 0 calc(122vw)}
-  .hero::before{background:linear-gradient(180deg,rgba(9,13,28,.2) 0%,transparent 40%),linear-gradient(0deg,var(--bg) 0%,transparent 14%)}
+  .hero{min-height:0;align-items:flex-start;padding:40px 0 0;flex-direction:column}
+  .hero::before{background:linear-gradient(180deg,rgba(8,11,24,.94) 0%,rgba(8,11,24,.86) 55%,rgba(8,11,24,.45) 80%,var(--bg) 100%)}
+  .hero__wall{inset:-10% -40%}
+  .wall__col:nth-child(n+4){display:none}
+  .hero__dra{position:relative;right:auto;bottom:auto;height:auto;width:min(420px,100%);margin:28px auto 0;z-index:0}
   .hero__beam{left:80%;top:40%;height:70%}
   .hero__logo{width:120px;margin-bottom:22px}
   .ctas{align-items:stretch}
@@ -598,6 +614,13 @@ strong,b{color:var(--text);font-weight:700}
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="topo">
+  <div class="hero__wall" aria-hidden="true">
+    <div class="wall__col"><div class="wall__track"><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-1.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-1.webp" alt="" width="720" height="1280" /></div></div>
+    <div class="wall__col"><div class="wall__track"><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-4.webp" alt="" width="720" height="1280" /><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-4.webp" alt="" width="720" height="1280" /></div></div>
+    <div class="wall__col"><div class="wall__track"><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-1.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-1.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /></div></div>
+    <div class="wall__col"><div class="wall__track"><img src="galeria-4.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-4.webp" alt="" width="720" height="1280" /><img src="galeria-8.webp" alt="" width="720" height="1280" /><img src="galeria-3.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /></div></div>
+    <div class="wall__col"><div class="wall__track"><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /><img src="galeria-5.webp" alt="" width="720" height="1280" /><img src="galeria-2.webp" alt="" width="720" height="1280" /><img src="galeria-6.webp" alt="" width="720" height="1280" /><img src="galeria-7.webp" alt="" width="720" height="1280" /></div></div>
+  </div>
   <div class="hero__beam" aria-hidden="true"></div>
   <div class="wrap hero__in">
     <div class="hero__content">
@@ -613,6 +636,7 @@ strong,b{color:var(--text);font-weight:700}
       <p class="crm" data-rv="fade" style="--d:7">Dra. Lulma Bhering | Cirurgiã Geral | <span>CRMMG: 71176 | RQE: 50890</span></p>
     </div>
   </div>
+  <div class="hero__dra" data-rv="fade" style="--d:2"><img src="dra-recorte.webp" alt="Dra. Lulma Bhering" width="1000" height="1204" fetchpriority="high" /></div>
 </header>
 
 <!-- ============ MÉTODO ETA ============ -->
