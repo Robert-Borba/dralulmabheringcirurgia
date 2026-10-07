@@ -208,18 +208,26 @@ strong,b{color:var(--text);font-weight:700}
 
 /* ---------- bônus ---------- */
 .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.bonus{position:relative;padding:30px 26px 28px;border-radius:18px;background:linear-gradient(180deg,#14161D,#0E0F14);border:1px solid var(--line);transition:transform .35s ease,border-color .35s ease}
-.bonus:hover{transform:translateY(-6px);border-color:var(--line-gold)}
-.bonus__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.bonus__ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(199,164,103,.1);border:1px solid var(--line-gold);color:var(--gold)}
-.bonus__ico .ico{width:26px;height:26px;animation:wiggle 4s ease-in-out infinite}
-@keyframes wiggle{0%,80%,100%{transform:rotate(0)}85%{transform:rotate(-10deg)}90%{transform:rotate(9deg)}95%{transform:rotate(-5deg)}}
-.bonus .tag{color:#F09484;background:rgba(210,104,90,.08);border-color:rgba(210,104,90,.3)}
-.bonus h3{font-size:1.12rem;font-weight:700;line-height:1.35;margin-bottom:14px}
-.bonus h3 small{display:block;font-size:.75rem;letter-spacing:.18em;color:var(--gold);font-weight:700;margin-bottom:.35rem}
-.dash{list-style:none;display:grid;gap:9px}
-.dash li{position:relative;padding-left:22px;color:var(--muted);font-size:.95rem;line-height:1.5}
-.dash li::before{content:"";position:absolute;left:0;top:.72em;width:12px;height:2px;border-radius:2px;background:var(--gold)}
+.bonus{position:relative;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#151A2C,#0C0F1A);border:1px solid var(--line-gold);box-shadow:0 30px 70px -35px rgba(0,0,0,.95);transition:transform .4s ease,box-shadow .4s ease}
+.bonus:hover{transform:translateY(-8px);box-shadow:0 40px 80px -30px rgba(199,164,103,.35)}
+/* tampa do presente */
+.bonus__lid{position:relative;height:150px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(70% 90% at 50% 0%,rgba(243,221,174,.35),transparent 70%),linear-gradient(160deg,#2A2416,#15131A 70%)}
+.bonus__lid::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:34px;margin-left:-17px;background:linear-gradient(90deg,#8C6A35,#F3DDAE 45%,#C7A467 60%,#8C6A35)}
+.bonus__lid::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,245,225,.32) 48%,transparent 62%);background-size:250% 100%;animation:lidshine 4.5s ease-in-out infinite}
+.bonus:nth-child(2) .bonus__lid::after{animation-delay:-1.5s}.bonus:nth-child(3) .bonus__lid::after{animation-delay:-3s}
+@keyframes lidshine{0%,35%{background-position:130% 0}100%{background-position:-130% 0}}
+.bonus__rib{position:absolute;left:0;right:0;top:50%;height:26px;margin-top:-13px;background:linear-gradient(180deg,#8C6A35,#F3DDAE 45%,#C7A467 60%,#8C6A35)}
+.bonus__ico{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1E2440,#0B0E1C);border:2px solid var(--gold-hi);color:var(--gold-hi);box-shadow:0 0 0 7px rgba(10,12,22,.55),0 0 34px rgba(243,221,174,.55)}
+.bonus__ico .ico{width:34px;height:34px;animation:wiggle 4s ease-in-out infinite}
+.bonus__ico::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(243,221,174,.7);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
+.bonus .tag{position:absolute;z-index:3;top:14px;right:14px;font-size:1rem;color:#2A1D08;background:var(--gold-grad);border:0;box-shadow:0 8px 20px -6px rgba(0,0,0,.7)}
+.bonus__body{position:relative;flex:1;padding:26px 26px 30px}
+.bonus__body::after{content:attr(data-n);position:absolute;right:14px;bottom:-26px;font-family:var(--f-display);font-weight:700;font-size:9rem;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(199,164,103,.16);pointer-events:none}
+.bonus h3{position:relative;font-size:1.18rem;font-weight:700;line-height:1.35;margin-bottom:16px}
+.bonus h3 small{display:table;font-size:.72rem;letter-spacing:.2em;color:#1d1405;background:var(--gold);font-weight:800;padding:.2rem .55rem;border-radius:6px;margin-bottom:.6rem}
+.dash{position:relative;z-index:1;list-style:none;display:grid;gap:10px}
+.dash li{position:relative;padding-left:30px;color:#CFC9BD;font-size:.96rem;line-height:1.5}
+.dash li::before{content:"";position:absolute;left:0;top:.18em;width:19px;height:19px;border-radius:50%;background:rgba(199,164,103,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23EBD3A0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;border:1px solid var(--line-gold)}
 
 /* ---------- valor ---------- */
 .value{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:clamp(40px,5vw,60px)}
@@ -410,17 +418,18 @@ strong,b{color:var(--text);font-weight:700}
 .pres__dots i:nth-child(2)::after{animation-delay:4s}.pres__dots i:nth-child(3)::after{animation-delay:9s}
 @keyframes dotfill{0%{transform:scaleX(0)}33.3%{transform:scaleX(1)}33.4%,100%{transform:scaleX(0)}}
 
-/* formações 02 e 03 com foto ao lado */
-.prod--ph{grid-template-columns:200px 1fr 230px}
-.prod__ph{align-self:stretch;min-height:320px}
+/* foto embaixo do número em cada formação */
+.prod__side .side-ph{width:100%;flex:1;min-height:300px;max-height:460px}
 
 /* "o presencial completa" com foto */
-.eq__card--ph{flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden;background:#111218}
-.eq__ph{position:relative;height:230px;overflow:hidden}
-.eq__ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.92);transition:transform .9s ease}
-.eq__card--ph:hover .eq__ph img{transform:scale(1.05)}
-.eq__ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#111218 3%,transparent 60%)}
-.eq__txt{display:flex;gap:16px;align-items:center;padding:4px 24px 24px}
+.eq__card--hi{position:relative;isolation:isolate;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:44px 30px 40px;border:0;border-radius:22px;background:radial-gradient(80% 70% at 50% 0%,rgba(199,164,103,.2),transparent 70%),linear-gradient(180deg,#141B33,#0B0F1F)}
+.eq__card--hi::before{content:"";position:absolute;inset:-1.5px;z-index:-1;border-radius:23px;padding:1.5px;background:conic-gradient(from var(--a,0deg),#5a4420,#F3DDAE,#C7A467,#5a4420 40%,#5a4420);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rot 6s linear infinite}
+.eq__card--hi:nth-child(3)::before{animation-direction:reverse}
+.eq__ico{position:relative;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:var(--gold-grad);color:#2A1D08;box-shadow:0 0 0 10px rgba(199,164,103,.08),0 0 50px rgba(243,221,174,.45)}
+.eq__ico::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(243,221,174,.6);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
+.eq__card--hi .eq__ico .ico{width:44px;height:44px;color:#2A1D08}
+.eq__card--hi p{font-family:var(--f-display);font-weight:600;font-size:clamp(1.25rem,1rem + .8vw,1.6rem);line-height:1.35;color:var(--text)}
+.eq__plus span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-body);font-weight:300;font-size:2.4rem;line-height:1;color:var(--gold-hi);border:1px solid var(--line-gold);background:rgba(199,164,103,.08);box-shadow:0 0 30px rgba(199,164,103,.3)}
 
 /* quem sou eu: foto extra sobreposta */
 .about__media{position:relative}
@@ -429,12 +438,11 @@ strong,b{color:var(--text);font-weight:700}
 
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
+  .prod__side .side-ph{min-height:240px}
   .prod--mec{grid-template-columns:170px 1fr}
   .prod--mec .prod__body{grid-column:2;grid-row:1 / span 2}
   .prod--mec .mec{grid-column:1;grid-row:2;width:150px;justify-self:start;align-self:start}
   .prod{grid-template-columns:170px 1fr}
-  .prod--ph .prod__body{grid-column:2;grid-row:1 / span 2}
-  .prod--ph .prod__ph{grid-column:1;grid-row:2;width:150px;min-height:230px;align-self:start}
 }
 @media (max-width:900px){
   .eta-steps,.bonus-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}
@@ -460,7 +468,8 @@ strong,b{color:var(--text);font-weight:700}
   .ctas{grid-template-columns:1fr}
   .hero .alert{font-size:.72rem}
   .prod,.prod--mec{grid-template-columns:1fr;gap:18px}
-  .prod__side{flex-direction:row;align-items:center;justify-content:space-between}
+  .prod__side{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .prod__side .side-ph{flex:0 0 100%;min-height:0;max-height:none;aspect-ratio:16/10}
   .prod--mec .mec{grid-column:auto;grid-row:auto;width:140px;justify-self:center}
   .inside{flex-direction:column;gap:14px}
   .weekly{flex-direction:column;align-items:flex-start;padding:22px}
@@ -479,13 +488,9 @@ strong,b{color:var(--text);font-weight:700}
   .chips .sep{display:none}
   .prod--mec .prod__body{order:2;grid-column:auto;grid-row:auto}
   .prod--mec .mec{order:1;width:120px}
-  .prod--ph{grid-template-columns:1fr}
-  .prod--ph .prod__body{order:2;grid-column:auto;grid-row:auto}
-  .prod--ph .prod__ph{order:1;grid-column:auto;grid-row:auto;width:100%;min-height:0;aspect-ratio:16/10}
   .gal{--w:160px;--h:250px;--g:12px}
   .gal__it:nth-child(even){transform:translateY(18px)}
   .about__mini{right:-6px;bottom:-26px;width:38%}
-  .eq__ph{height:200px}
   .price__big{font-size:min(2.1rem,6.6vw);white-space:nowrap}
   .choose{justify-content:center;text-align:center}
   .choose::after,.final .choose::before{display:none}
@@ -599,6 +604,7 @@ strong,b{color:var(--text);font-weight:700}
       <div class="prod__side">
         <span class="prod__num" data-rv="fade" style="--d:1">01</span>
         <span class="tag" data-rv="fade" style="--d:2">R$5.597</span>
+        <figure class="side-ph ph" data-rv="zoom" style="--d:3"><img src="galeria-4.webp" alt="Dra. Lulma Bhering operando" width="720" height="1280" loading="lazy" style="object-position:45% 38%" /></figure>
       </div>
       <div class="prod__body">
         <h3 class="prod__title" data-rv style="--d:1">FORMAÇÃO <span class="nw">ON-LINE</span> PEQUENAS CIRURGIAS DO ZERO, RECONHECIDA PELO MEC</h3>
@@ -619,10 +625,11 @@ strong,b{color:var(--text);font-weight:700}
     </article>
 
     <!-- 02 -->
-    <article class="prod prod--ph corners" data-rv>
+    <article class="prod corners" data-rv>
       <div class="prod__side">
         <span class="prod__num" data-rv="fade" style="--d:1">02</span>
         <span class="tag" data-rv="fade" style="--d:2">R$1.000</span>
+        <figure class="side-ph ph" data-rv="zoom" style="--d:3"><img src="galeria-6.webp" alt="Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:70% 40%" /></figure>
       </div>
       <div class="prod__body">
         <h3 class="prod__title" data-rv style="--d:1">ACADEMIA AVANÇADA DE PEQUENAS CIRURGIAS</h3>
@@ -632,14 +639,14 @@ strong,b{color:var(--text);font-weight:700}
         <!-- LINK PENDENTE: grade da Academia -->
         <a class="btn btn--ghost" href="#" data-link-pendente data-rv style="--d:5">VER GRADE DA ACADEMIA AVANÇADA</a>
       </div>
-      <figure class="prod__ph ph" data-rv="zoom" style="--d:3"><img src="galeria-6.webp" alt="Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:70% 40%" /></figure>
     </article>
 
     <!-- 03 -->
-    <article class="prod prod--ph corners" data-rv>
+    <article class="prod corners" data-rv>
       <div class="prod__side">
         <span class="prod__num" data-rv="fade" style="--d:1">03</span>
         <span class="tag" data-rv="fade" style="--d:2">R$697</span>
+        <figure class="side-ph ph" data-rv="zoom" style="--d:3"><img src="galeria-7.webp" alt="Lesão marcada antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 58%" /></figure>
       </div>
       <div class="prod__body">
         <h3 class="prod__title" data-rv style="--d:1">FORMAÇÃO EM RECONHECIMENTO DE LESÕES</h3>
@@ -649,7 +656,6 @@ strong,b{color:var(--text);font-weight:700}
         <!-- LINK PENDENTE: grade de Reconhecimento de Lesões -->
         <a class="btn btn--ghost" href="#" data-link-pendente data-rv style="--d:5">VER A GRADE COMPLETA</a>
       </div>
-      <figure class="prod__ph ph" data-rv="zoom" style="--d:3"><img src="galeria-7.webp" alt="Lesão marcada antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:50% 58%" /></figure>
     </article>
   </div>
 </section>
@@ -723,8 +729,9 @@ strong,b{color:var(--text);font-weight:700}
     </div>
 
     <div class="bonus-grid">
-      <article class="bonus corners" data-rv style="--d:0">
-        <div class="bonus__top"><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag">R$150</span></div>
+      <article class="bonus" data-rv style="--d:0">
+        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag">R$150</span></div>
+        <div class="bonus__body" data-n="1">
         <h3><small>1-</small>As "Surpresinhas" das Pequenas Cirurgias no P.A</h3>
         <ul class="dash">
           <li>Avaliação e Decisão de Sutura em Feridas Traumáticas;</li>
@@ -733,18 +740,22 @@ strong,b{color:var(--text);font-weight:700}
           <li>Drenando Hematomas Ungueais;</li>
           <li>O Manejo dos Abscessos.</li>
         </ul>
+        </div>
       </article>
-      <article class="bonus corners" data-rv style="--d:2">
-        <div class="bonus__top"><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag">R$150</span></div>
+      <article class="bonus" data-rv style="--d:2">
+        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag">R$150</span></div>
+        <div class="bonus__body" data-n="2">
         <h3><small>2-</small>Organização é tudo</h3>
         <ul class="dash">
           <li>Organização Semanal – Agenda;</li>
           <li>Planilha Contato Semanal + Tutorial;</li>
           <li>Tire um Tempo para Estudar e Treinar no Simulador.</li>
         </ul>
+        </div>
       </article>
-      <article class="bonus corners" data-rv style="--d:4">
-        <div class="bonus__top"><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag">R$994</span></div>
+      <article class="bonus" data-rv style="--d:4">
+        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag">R$994</span></div>
+        <div class="bonus__body" data-n="3">
         <h3><small>3-</small>+ de 40 PDFs e planilhas de gestão</h3>
         <ul class="dash">
           <li>Faça a gestão dos seus pacientes;</li>
@@ -752,6 +763,7 @@ strong,b{color:var(--text);font-weight:700}
           <li>Precifique automaticamente;</li>
           <li>Tenha acesso a PDFs com modelos de documentos, POPs e materiais de apoio.</li>
         </ul>
+        </div>
       </article>
     </div>
 
@@ -779,9 +791,9 @@ strong,b{color:var(--text);font-weight:700}
       <p data-rv style="--d:4">Pode rever uma técnica. Reassistir a um procedimento. Consultar materiais. E continuar aprofundando aquilo que praticou presencialmente.</p>
     </div>
     <div class="eq">
-      <div class="eq__card eq__card--ph" data-rv="left"><div class="eq__ph"><img src="galeria-1.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:50% 36%" /></div><div class="eq__txt"><svg class="ico"><use href="#i-screen"/></svg><p>O <span class="nw">on-line</span> constrói a base e permite revisão.</p></div></div>
-      <div class="eq__plus" data-rv="zoom" aria-hidden="true">+</div>
-      <div class="eq__card eq__card--ph" data-rv="right"><div class="eq__ph"><img src="galeria-4.webp" alt="" width="720" height="1280" loading="lazy" style="object-position:45% 45%" /></div><div class="eq__txt"><svg class="ico"><use href="#i-hand"/></svg><p>O presencial acrescenta a experiência prática no paciente real.</p></div></div>
+      <div class="eq__card eq__card--hi" data-rv="left"><span class="eq__ico"><svg class="ico"><use href="#i-screen"/></svg></span><p>O <span class="nw">on-line</span> constrói a base e permite revisão.</p></div>
+      <div class="eq__plus" data-rv="zoom" aria-hidden="true"><span>+</span></div>
+      <div class="eq__card eq__card--hi" data-rv="right"><span class="eq__ico"><svg class="ico"><use href="#i-hand"/></svg></span><p>O presencial acrescenta a experiência prática no paciente real.</p></div>
     </div>
   </div>
 </section>
