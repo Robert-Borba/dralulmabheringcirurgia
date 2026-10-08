@@ -220,21 +220,29 @@ strong,b{color:var(--text);font-weight:700}
 
 /* ---------- bônus ---------- */
 .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.bonus{position:relative;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#151A2C,#0C0F1A);border:1px solid var(--line-gold);box-shadow:0 30px 70px -35px rgba(0,0,0,.95);transition:transform .4s ease,box-shadow .4s ease}
-.bonus:hover{transform:translateY(-8px);box-shadow:0 40px 80px -30px rgba(199,164,103,.35)}
-/* tampa do presente */
-.bonus__lid{position:relative;height:150px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(55% 75% at 50% 50%,rgba(199,164,103,.22),transparent 72%),linear-gradient(180deg,#171C30,#11152A);border-bottom:1px solid var(--line-gold)}
-.bonus__lid::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,245,225,.1) 48%,transparent 62%);background-size:250% 100%;animation:lidshine 4.5s ease-in-out infinite}
-.bonus:nth-child(2) .bonus__lid::after{animation-delay:-1.5s}.bonus:nth-child(3) .bonus__lid::after{animation-delay:-3s}
-@keyframes lidshine{0%,35%{background-position:130% 0}100%{background-position:-130% 0}}
-.bonus__ico{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1E2440,#0B0E1C);border:2px solid var(--gold-hi);color:var(--gold-hi);box-shadow:0 0 0 7px rgba(199,164,103,.08),0 0 30px rgba(243,221,174,.28)}
-.bonus__ico .ico{width:34px;height:34px;animation:wiggle 4s ease-in-out infinite}
-.bonus__ico::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(243,221,174,.7);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
-.bonus .tag{position:absolute;z-index:3;top:14px;right:14px;font-size:1rem;color:#2A1D08;background:var(--gold-grad);border:0;box-shadow:0 8px 20px -6px rgba(0,0,0,.7)}
-.bonus__body{position:relative;flex:1;padding:26px 26px 30px}
-.bonus__body::after{content:attr(data-n);position:absolute;right:14px;bottom:-26px;font-family:var(--f-display);font-weight:700;font-size:9rem;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(199,164,103,.16);pointer-events:none}
-.bonus h3{position:relative;font-size:1.18rem;font-weight:700;line-height:1.35;margin-bottom:16px}
-.bonus h3 small{display:table;font-size:.72rem;letter-spacing:.2em;color:#1d1405;background:var(--gold);font-weight:800;padding:.2rem .55rem;border-radius:6px;margin-bottom:.6rem}
+.bonus{position:relative;isolation:isolate;display:flex;flex-direction:column;border-radius:24px;padding:1.5px;background:linear-gradient(160deg,rgba(243,221,174,.75),rgba(199,164,103,.12) 35%,rgba(199,164,103,.05) 65%,rgba(243,221,174,.45));box-shadow:0 30px 70px -35px rgba(0,0,0,.95);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
+.bonus:hover{transform:translateY(-10px);box-shadow:0 46px 90px -34px rgba(199,164,103,.4)}
+.bonus__in{position:relative;flex:1;display:flex;flex-direction:column;border-radius:22.5px;overflow:hidden;background:radial-gradient(120% 60% at 50% 0%,#1A2242 0%,#0E1328 55%,#0A0D1C 100%)}
+/* palco do ícone: anéis girando + brilho + faíscas */
+.bonus__lid{position:relative;height:190px;display:grid;place-items:center}
+.bonus__lid::before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(243,221,174,.28),rgba(199,164,103,.08) 45%,transparent 70%);animation:pulse 4s ease-in-out infinite}
+.bonus__ring{position:absolute;width:150px;height:150px;border-radius:50%;border:1px dashed rgba(235,211,160,.38);animation:spin 26s linear infinite}
+.bonus__ring::after{content:"";position:absolute;top:-4px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#FFF1D2;box-shadow:0 0 12px 3px rgba(243,221,174,.85)}
+.bonus__ring--2{width:118px;height:118px;border:1px solid rgba(235,211,160,.16);animation-duration:16s;animation-direction:reverse}
+.bonus__ring--2::after{top:auto;bottom:-3px;width:5px;height:5px}
+.bonus:nth-child(2) .bonus__ring{animation-delay:-8s}.bonus:nth-child(3) .bonus__ring{animation-delay:-16s}
+.bonus__ico{position:relative;z-index:2;width:84px;height:84px;border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,#FBEBC6 0%,#D9B877 38%,#B48A47 70%,#E9CF98 100%);color:#2A1D08;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -6px 12px rgba(110,78,30,.45),0 18px 34px -10px rgba(0,0,0,.85),0 0 40px rgba(243,221,174,.35);transform:rotate(-8deg);animation:tile 6s ease-in-out infinite}
+.bonus:nth-child(2) .bonus__ico{animation-delay:-2s}.bonus:nth-child(3) .bonus__ico{animation-delay:-4s}
+@keyframes tile{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(4deg) translateY(-8px)}}
+.bonus__ico::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%) -150% 0/250% 100% no-repeat;animation:tileshine 4.5s ease-in-out infinite}
+@keyframes tileshine{0%,55%{background-position:150% 0}100%{background-position:-150% 0}}
+.bonus__ico .ico{position:relative;width:38px;height:38px;stroke-width:2}
+.bonus .tag{position:absolute;z-index:3;top:16px;right:16px;font-size:.92rem;color:#F3C7BD;background:rgba(210,104,90,.12);border:1px solid rgba(224,112,95,.45);backdrop-filter:blur(4px)}
+.bonus__body{position:relative;flex:1;padding:4px 28px 32px;text-align:center}
+.bonus__body::after{display:none}
+.bonus h3{position:relative;font-size:1.2rem;font-weight:700;line-height:1.35;margin-bottom:18px}
+.bonus h3 small{display:table;margin:0 auto .7rem;font-size:.7rem;letter-spacing:.3em;color:var(--gold-hi);background:none;border:1px solid var(--line-gold);font-weight:800;padding:.32rem .8rem .32rem 1.1rem;border-radius:999px}
+.bonus .dash{text-align:left;padding-top:18px;border-top:1px solid rgba(255,255,255,.07)}
 .dash{position:relative;z-index:1;list-style:none;display:grid;gap:10px}
 .dash li{position:relative;padding-left:30px;color:#CFC9BD;font-size:.96rem;line-height:1.5}
 .dash li::before{content:"";position:absolute;left:0;top:.18em;width:19px;height:19px;border-radius:50%;background:rgba(199,164,103,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23EBD3A0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;border:1px solid var(--line-gold)}
@@ -822,8 +830,8 @@ strong,b{color:var(--text);font-weight:700}
     </div>
 
     <div class="bonus-grid">
-      <article class="bonus" data-rv style="--d:0">
-        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag strike">R$150</span></div>
+      <article class="bonus" data-rv style="--d:0"><div class="bonus__in">
+        <div class="bonus__lid"><span class="bonus__ring" aria-hidden="true"></span><span class="bonus__ring bonus__ring--2" aria-hidden="true"></span><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag strike">R$150</span></div>
         <div class="bonus__body" data-n="1">
         <h3><small>1-</small>As "Surpresinhas" das Pequenas Cirurgias no P.A</h3>
         <ul class="dash">
@@ -834,9 +842,10 @@ strong,b{color:var(--text);font-weight:700}
           <li>O Manejo dos Abscessos.</li>
         </ul>
         </div>
+        </div>
       </article>
-      <article class="bonus" data-rv style="--d:2">
-        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag strike">R$150</span></div>
+      <article class="bonus" data-rv style="--d:2"><div class="bonus__in">
+        <div class="bonus__lid"><span class="bonus__ring" aria-hidden="true"></span><span class="bonus__ring bonus__ring--2" aria-hidden="true"></span><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag strike">R$150</span></div>
         <div class="bonus__body" data-n="2">
         <h3><small>2-</small>Organização é tudo</h3>
         <ul class="dash">
@@ -845,9 +854,10 @@ strong,b{color:var(--text);font-weight:700}
           <li>Tire um Tempo para Estudar e Treinar no Simulador.</li>
         </ul>
         </div>
+        </div>
       </article>
-      <article class="bonus" data-rv style="--d:4">
-        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag strike">R$994</span></div>
+      <article class="bonus" data-rv style="--d:4"><div class="bonus__in">
+        <div class="bonus__lid"><span class="bonus__ring" aria-hidden="true"></span><span class="bonus__ring bonus__ring--2" aria-hidden="true"></span><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag strike">R$994</span></div>
         <div class="bonus__body" data-n="3">
         <h3><small>3-</small>+ de 40 PDFs e planilhas de gestão</h3>
         <ul class="dash">
@@ -856,6 +866,7 @@ strong,b{color:var(--text);font-weight:700}
           <li>Precifique automaticamente;</li>
           <li>Tenha acesso a PDFs com modelos de documentos, POPs e materiais de apoio.</li>
         </ul>
+        </div>
         </div>
       </article>
     </div>
