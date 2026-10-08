@@ -223,13 +223,11 @@ strong,b{color:var(--text);font-weight:700}
 .bonus{position:relative;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#151A2C,#0C0F1A);border:1px solid var(--line-gold);box-shadow:0 30px 70px -35px rgba(0,0,0,.95);transition:transform .4s ease,box-shadow .4s ease}
 .bonus:hover{transform:translateY(-8px);box-shadow:0 40px 80px -30px rgba(199,164,103,.35)}
 /* tampa do presente */
-.bonus__lid{position:relative;height:150px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(70% 90% at 50% 0%,rgba(243,221,174,.35),transparent 70%),linear-gradient(160deg,#2A2416,#15131A 70%)}
-.bonus__lid::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:34px;margin-left:-17px;background:linear-gradient(90deg,#8C6A35,#F3DDAE 45%,#C7A467 60%,#8C6A35)}
-.bonus__lid::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,245,225,.32) 48%,transparent 62%);background-size:250% 100%;animation:lidshine 4.5s ease-in-out infinite}
+.bonus__lid{position:relative;height:150px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(55% 75% at 50% 50%,rgba(199,164,103,.22),transparent 72%),linear-gradient(180deg,#171C30,#11152A);border-bottom:1px solid var(--line-gold)}
+.bonus__lid::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,245,225,.1) 48%,transparent 62%);background-size:250% 100%;animation:lidshine 4.5s ease-in-out infinite}
 .bonus:nth-child(2) .bonus__lid::after{animation-delay:-1.5s}.bonus:nth-child(3) .bonus__lid::after{animation-delay:-3s}
 @keyframes lidshine{0%,35%{background-position:130% 0}100%{background-position:-130% 0}}
-.bonus__rib{position:absolute;left:0;right:0;top:50%;height:26px;margin-top:-13px;background:linear-gradient(180deg,#8C6A35,#F3DDAE 45%,#C7A467 60%,#8C6A35)}
-.bonus__ico{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1E2440,#0B0E1C);border:2px solid var(--gold-hi);color:var(--gold-hi);box-shadow:0 0 0 7px rgba(10,12,22,.55),0 0 34px rgba(243,221,174,.55)}
+.bonus__ico{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1E2440,#0B0E1C);border:2px solid var(--gold-hi);color:var(--gold-hi);box-shadow:0 0 0 7px rgba(199,164,103,.08),0 0 30px rgba(243,221,174,.28)}
 .bonus__ico .ico{width:34px;height:34px;animation:wiggle 4s ease-in-out infinite}
 .bonus__ico::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(243,221,174,.7);animation:ping 2.6s cubic-bezier(0,0,.2,1) infinite}
 .bonus .tag{position:absolute;z-index:3;top:14px;right:14px;font-size:1rem;color:#2A1D08;background:var(--gold-grad);border:0;box-shadow:0 8px 20px -6px rgba(0,0,0,.7)}
@@ -502,6 +500,11 @@ strong,b{color:var(--text);font-weight:700}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 @keyframes dots{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
 
+/* preço de ancoragem riscado */
+.strike{text-decoration:line-through;text-decoration-color:#E0705F;text-decoration-thickness:2px}
+.value__num.strike{color:#CFC9BD;text-decoration-thickness:4px}
+.checks li .v.strike{color:var(--muted)}
+
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
   .hero__dra{right:-140px;height:78%}
@@ -714,7 +717,7 @@ strong,b{color:var(--text);font-weight:700}
     <article class="fm" data-rv>
       <div class="fm__media">
         <img src="galeria-4.webp" alt="Dra. Lulma Bhering operando" width="720" height="1280" loading="lazy" style="object-position:45% 30%" />
-        <span class="tag fm__price">R$5.597</span>
+        <span class="tag fm__price strike">R$5.597</span>
         <span class="fm__num" aria-hidden="true">01</span>
         <img class="fm__seal" src="selo-mec.webp" alt="Reconhecido pelo MEC" width="1000" height="1000" loading="lazy" />
       </div>
@@ -737,7 +740,7 @@ strong,b{color:var(--text);font-weight:700}
     <article class="fm fm--rev" data-rv>
       <div class="fm__media">
         <img src="galeria-6.webp" alt="Dra. Lulma Bhering" width="720" height="1280" loading="lazy" style="object-position:72% 30%" />
-        <span class="tag fm__price">R$1.000</span>
+        <span class="tag fm__price strike">R$1.000</span>
         <span class="fm__num" aria-hidden="true">02</span>
       </div>
       <div class="fm__body">
@@ -755,7 +758,7 @@ strong,b{color:var(--text);font-weight:700}
     <article class="fm" data-rv>
       <div class="fm__media">
         <img src="galeria-7.webp" alt="Lesão marcada antes do procedimento" width="720" height="1280" loading="lazy" style="object-position:55% 45%" />
-        <span class="tag fm__price">R$697</span>
+        <span class="tag fm__price strike">R$697</span>
         <span class="fm__num" aria-hidden="true">03</span>
       </div>
       <div class="fm__body">
@@ -791,7 +794,7 @@ strong,b{color:var(--text);font-weight:700}
       </div>
       <div class="pres__body">
         <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap" data-rv>
-          <span class="prod__num">04</span><span class="tag">R$16.900</span>
+          <span class="prod__num">04</span><span class="tag strike">R$16.900</span>
         </div>
         <h3 data-rv style="--d:1">FORMAÇÃO PRESENCIAL DE 2 DIAS - <span class="hot">APENAS 5 VAGAS</span></h3>
         <p data-rv style="--d:2">Serão dois dias de mão na massa aqui comigo, com diversos casos de Pequenas Cirurgias.</p>
@@ -820,7 +823,7 @@ strong,b{color:var(--text);font-weight:700}
 
     <div class="bonus-grid">
       <article class="bonus" data-rv style="--d:0">
-        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag">R$150</span></div>
+        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-gift"/></svg></div><span class="tag strike">R$150</span></div>
         <div class="bonus__body" data-n="1">
         <h3><small>1-</small>As "Surpresinhas" das Pequenas Cirurgias no P.A</h3>
         <ul class="dash">
@@ -833,7 +836,7 @@ strong,b{color:var(--text);font-weight:700}
         </div>
       </article>
       <article class="bonus" data-rv style="--d:2">
-        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag">R$150</span></div>
+        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-agenda"/></svg></div><span class="tag strike">R$150</span></div>
         <div class="bonus__body" data-n="2">
         <h3><small>2-</small>Organização é tudo</h3>
         <ul class="dash">
@@ -844,7 +847,7 @@ strong,b{color:var(--text);font-weight:700}
         </div>
       </article>
       <article class="bonus" data-rv style="--d:4">
-        <div class="bonus__lid"><span class="bonus__rib"></span><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag">R$994</span></div>
+        <div class="bonus__lid"><div class="bonus__ico"><svg class="ico"><use href="#i-sheet"/></svg></div><span class="tag strike">R$994</span></div>
         <div class="bonus__body" data-n="3">
         <h3><small>3-</small>+ de 40 PDFs e planilhas de gestão</h3>
         <ul class="dash">
@@ -860,11 +863,11 @@ strong,b{color:var(--text);font-weight:700}
     <div class="value">
       <div class="value__card corners" data-rv="left">
         <p>SE VOCÊ FOSSE INVESTIR SEPARADO EM CADA UMA DESSAS FORMAÇÕES <span class="nw">ON-LINE</span> + OS BÔNUS, DARIA UM TOTAL DE:</p>
-        <span class="value__num gold-text" data-count="8587">R$8.587</span>
+        <span class="value__num strike" data-count="8587">R$8.587</span>
       </div>
       <div class="value__card corners" data-rv="right">
         <p>E SE FOSSE INVESTIR SEPARADO NA FORMAÇÃO PRESENCIAL SERIA:</p>
-        <span class="value__num gold-text" data-count="16900">R$16.900</span>
+        <span class="value__num strike" data-count="16900">R$16.900</span>
       </div>
     </div>
   </div>
@@ -924,13 +927,13 @@ strong,b{color:var(--text);font-weight:700}
         <span class="offer__label">OPÇÃO 1</span>
         <h3>3 FORMAÇÕES <span class="nw">ON-LINE</span> COM ACESSO DE 3 ANOS</h3>
         <ul class="checks">
-          <li><svg class="ico"><use href="#i-check"/></svg><span>Formação <span class="nw">On-line</span> Pequenas Cirurgias do Zero (reconhecida pelo MEC, com 50 horas) <span class="v">R$5.597</span>;</span></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><span>Academia Avançada das Pequenas Cirurgias <span class="v">R$1.000</span>;</span></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><span>Formação em Reconhecimento de Lesões <span class="v">R$697</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Formação <span class="nw">On-line</span> Pequenas Cirurgias do Zero (reconhecida pelo MEC, com 50 horas) <span class="v strike">R$5.597</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Academia Avançada das Pequenas Cirurgias <span class="v strike">R$1.000</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Formação em Reconhecimento de Lesões <span class="v strike">R$697</span>;</span></li>
           <li><svg class="ico"><use href="#i-check"/></svg><span>Atualizações sem custo durante o período de acesso;</span></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><span>+ de 40 PDFs com modelos de documentos, POPs, materiais de apoio e planilhas de gestão <span class="v">R$994</span>;</span></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><span>Bônus 1: As "Surpresinhas" das Pequenas Cirurgias no P.A <span class="v">R$150</span>;</span></li>
-          <li><svg class="ico"><use href="#i-check"/></svg><span>Bônus 2: Organização é tudo <span class="v">R$150</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>+ de 40 PDFs com modelos de documentos, POPs, materiais de apoio e planilhas de gestão <span class="v strike">R$994</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Bônus 1: As "Surpresinhas" das Pequenas Cirurgias no P.A <span class="v strike">R$150</span>;</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Bônus 2: Organização é tudo <span class="v strike">R$150</span>;</span></li>
           <li><svg class="ico"><use href="#i-check"/></svg><span>Suporte e acesso de 3 anos;</span></li>
           <li><svg class="ico"><use href="#i-check"/></svg><span>Certificado.</span></li>
         </ul>
