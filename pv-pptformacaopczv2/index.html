@@ -570,6 +570,28 @@ strong,b{color:var(--text);font-weight:700}
   .choose{justify-content:center;text-align:center}
   .choose::after,.final .choose::before{display:none}
 }
+/* Pré-checkout (formulário da Iducali antes do Hotmart) */
+.pre{width:min(460px,calc(100% - 32px));max-height:calc(100dvh - 32px);margin:auto;padding:0;border:1px solid var(--line-gold);border-radius:20px;background:linear-gradient(180deg,#121A31,#0B1023);color:var(--text);box-shadow:0 30px 80px -20px rgba(0,0,0,.7);overflow:auto}
+.pre::backdrop{background:rgba(5,7,15,.78);backdrop-filter:blur(4px)}
+.pre[open]{animation:prein .28s ease-out}
+@keyframes prein{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.pre__in{position:relative;padding:34px 28px 24px}
+.pre__x{position:absolute;top:10px;right:10px;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:var(--muted);font-size:1.6rem;line-height:1;cursor:pointer}
+.pre__x:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.pre__label{display:block;margin:0 auto 10px;width:max-content;padding:.3rem .8rem;border:1px solid var(--line-gold);border-radius:999px;color:var(--gold-hi);font-size:.72rem;font-weight:700;letter-spacing:.12em}
+.pre h2{margin:0 0 6px;font-family:var(--f-display);font-weight:600;font-size:1.7rem;line-height:1.2;text-align:center}
+.pre__sub{margin:0 0 22px;color:var(--muted);font-size:.92rem;line-height:1.5;text-align:center;text-wrap:balance}
+.pre__f{margin-bottom:14px}
+.pre__f label{display:block;margin-bottom:6px;color:var(--gold-hi);font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.pre__f input{width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:rgba(255,255,255,.05);color:var(--text);font:inherit;font-size:16px;outline:none;transition:border-color .15s,background .15s}
+.pre__f input:focus{border-color:var(--gold);background:rgba(255,255,255,.08)}
+.pre__f input[aria-invalid="true"]{border-color:#E07A7A}
+.pre .btn{width:100%;min-width:0;margin-top:8px;white-space:normal}
+.pre .btn[disabled]{opacity:.7;cursor:wait}
+.pre__err{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(224,122,122,.45);border-radius:10px;background:rgba(224,122,122,.12);font-size:.85rem}
+.pre__ok{display:none;padding:12px 0 6px;text-align:center}
+.pre__ok i{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;margin-bottom:14px;border-radius:50%;background:var(--gold);color:#2A1D08;font-size:1.6rem;font-style:normal;font-weight:700}
+.pre__foot{margin-top:16px;color:var(--muted-2);font-size:.7rem;text-align:center}
 </style>
 <!-- ed:gerado (o painel refaz esta parte; edite fora dela) -->
 <style id="ed-elementos">:where(:root){--color-primary:#C7A467;--color-rose:#CE9C7E;--color-accent:#7DBB3A;--color-bg:#0A0A0D;--color-secondary:#15161B;--color-text:#F6F3EC;--color-text-muted:#B9B3A6;--color-bg-alt:#DCC7A1;--color-rose-text:#3B2318;--font-display:'Playfair Display', Georgia, serif;--font-body:'Inter', -apple-system, sans-serif}:root{--ed-primaria:var(--color-primary, #C7A467);--ed-destaque:var(--color-rose, #CE9C7E);--ed-texto-botao:var(--color-rose-text, #3B2318);--ed-fundo:var(--color-bg, #0A0A0D);--ed-superficie:var(--color-secondary, #15161B);--ed-texto:var(--color-text, #F6F3EC);--ed-suave:var(--color-text-muted, #B9B3A6);--ed-fonte-titulo:var(--font-display, 'Playfair Display', Georgia, serif);--ed-fonte-texto:var(--font-body, 'Inter', -apple-system, sans-serif)}
@@ -1051,8 +1073,7 @@ html .ed-botao[data-efeito="seta"]::after{margin-left:0}
           <span class="price__big gold-text">12x de R$578,86</span>
           <p class="price__cash">ou <b>R$5.597</b> à vista.</p>
           <div class="pay"><span>Cartão em 12x</span><span>2 cartões em até 12x</span><span>Entrada no Pix à vista + cartão em 12x</span><span>Pix ou boleto à vista</span></div>
-          <!-- LINK PENDENTE: checkout opção 1 -->
-          <a class="btn btn--rose btn--block" href="#" data-link-pendente>QUERO ACESSO AS 3 FORMAÇÕES ON-LINE</a>
+          <a class="btn btn--rose btn--block" href="#opcao-1" data-pre="1">QUERO ACESSO AS 3 FORMAÇÕES ON-LINE</a>
           <p class="offer__note">Menos que o valor de 6 plantões.</p>
         </div>
       </article>
@@ -1075,8 +1096,7 @@ html .ed-botao[data-efeito="seta"]::after{margin-left:0}
           <span class="price__big gold-text">12 x de R$ 1.541,00 *</span>
           <p class="price__cash">Ou <b>R$ 14.900,00</b> à vista</p>
           <div class="pay"><span>Cartão em 12x</span><span>2 cartões em até 12x</span><span>Entrada no Pix à vista + cartão em 12x</span><span>Pix ou boleto à vista</span></div>
-          <!-- LINK PENDENTE: checkout opção 2 -->
-          <a class="btn btn--gold btn--block" href="#" data-link-pendente>QUERO O ON-LINE + PRESENCIAL DE 2 DIAS</a>
+          <a class="btn btn--gold btn--block" href="#opcao-2" data-pre="2">QUERO O ON-LINE + PRESENCIAL DE 2 DIAS</a>
         </div>
       </article>
     </div>
@@ -1383,6 +1403,173 @@ document.addEventListener('click', function (e) {
   document.querySelectorAll('a[href*="hotmart.com"]').forEach(completar);
   // garante também em link criado ou trocado depois (na hora do clique)
   document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href*="hotmart.com"]'); if (a) completar(a); }, true);
+})();
+
+/* Pré-checkout: os botões das opções abrem o formulário da Iducali; enviado, segue pro Hotmart
+   com UTMs, lead_id e os dados preenchidos. Sem link de checkout, mostra a mensagem de recebido. */
+(function () {
+  var TRACK = 'https://sistema.iducali.com.br/backend/api/pixel/cgQBInPZhHNvpgn7/track';
+  var OPCOES = {
+    '1': { rotulo: 'OPÇÃO 1', slug: 'opcao-1---ppt-formacao-pcz', id: 'e8d80d05-d323-42b3-9b2e-10d5b6c2350b', checkout: '', cor: 'btn--rose' },
+    '2': { rotulo: 'OPÇÃO 2', slug: 'opcao-2---ppt-formacao', id: '5429d0a2-ebc9-482b-ad9e-666acc05799d', checkout: 'https://pay.hotmart.com/E107823254B?off=kwsnlxtc', cor: 'btn--gold' }
+  };
+  var CHAVES = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'iducali_source', 'iducali_ad_id', 'gclid', 'fbclid', 'xcod', 'sck', 'src'];
+  var MSG_OK = 'Pré-inscrição recebida com sucesso! Em breve entraremos em contato.';
+
+  // script da Iducali que guarda as UTMs da visita
+  var s = document.createElement('script');
+  s.src = 'https://sistema.iducali.com.br/backend/api/pixel/utms.js';
+  s.async = true;
+  s.setAttribute('data-iducali-safe', '');
+  s.setAttribute('data-iducali-prevent-subids', '');
+  document.head.appendChild(s);
+
+  function guardadaIducali(k) {
+    try {
+      var v = localStorage.getItem('idc' + k), exp = localStorage.getItem('idc' + k + '_exp');
+      return v && exp && new Date(exp) >= new Date() ? v : '';
+    } catch (e) { return ''; }
+  }
+  function utms() {
+    var pagina = new URLSearchParams(location.search), sessao = {}, ajudante = {}, out = {};
+    try { sessao = JSON.parse(sessionStorage.getItem('lulma-utm') || '{}'); } catch (e) {}
+    try {
+      var h = window._iducaliUtms && window._iducaliUtms.getParams && window._iducaliUtms.getParams();
+      if (h && typeof h.get === 'function') CHAVES.forEach(function (k) { if (h.get(k)) ajudante[k] = h.get(k); });
+      else if (h && typeof h === 'object') ajudante = h;
+    } catch (e) {}
+    CHAVES.forEach(function (k) {
+      var v = pagina.get(k);
+      if (v === 'null' || v === 'undefined') v = '';
+      v = v || sessao[k] || ajudante[k] || guardadaIducali(k);
+      if (v) out[k] = v;
+    });
+    return out;
+  }
+  function linkDoCheckout(base, lead, leadId) {
+    try { if (window._iducaliUtms && window._iducaliUtms.append) base = window._iducaliUtms.append(base); } catch (e) {}
+    var u = new URL(base), p = u.searchParams, t = utms();
+    Object.keys(t).forEach(function (k) { if (!p.has(k)) p.set(k, t[k]); });
+    if (leadId && !p.has('lead_id')) p.set('lead_id', String(leadId));
+    var sep = 'hQ21xR', pacote = [t.utm_source, t.utm_campaign, t.utm_medium, t.utm_content, t.utm_term].map(function (v) { return v || ''; }).join(sep);
+    if (pacote.split(sep).join('')) {
+      if (!p.has('xcod')) p.set('xcod', pacote);
+      if (!p.has('sck')) p.set('sck', pacote);
+      if (!p.has('src')) p.set('src', t.src || pacote);
+    }
+    var tel = lead.phone.replace(/\D/g, '');
+    if (!p.has('name')) p.set('name', lead.name);
+    if (!p.has('email')) p.set('email', lead.email);
+    if (tel.length >= 10) {
+      if (!p.has('phoneac')) p.set('phoneac', tel.slice(0, 2));
+      if (!p.has('phonenumber')) p.set('phonenumber', tel.slice(2));
+      if (!p.has('phone')) p.set('phone', tel);
+    }
+    return u.toString();
+  }
+
+  var dlg = document.createElement('dialog');
+  dlg.className = 'pre';
+  dlg.setAttribute('aria-labelledby', 'pre-titulo');
+  dlg.innerHTML =
+    '<div class="pre__in">' +
+      '<button type="button" class="pre__x" aria-label="Fechar">&times;</button>' +
+      '<span class="pre__label"></span>' +
+      '<form class="pre__form" novalidate>' +
+        '<h2 id="pre-titulo">Estamos quase lá...</h2>' +
+        '<p class="pre__sub">Preencha os dados abaixo para finalizar sua pré-inscrição.</p>' +
+        '<div class="pre__f"><label for="pre-crm">CRM/ESTADO</label><input id="pre-crm" name="crmestado" type="text" required autocomplete="off" /></div>' +
+        '<div class="pre__f"><label for="pre-nome">Nome completo</label><input id="pre-nome" name="name" type="text" required autocomplete="name" /></div>' +
+        '<div class="pre__f"><label for="pre-email">E-mail</label><input id="pre-email" name="email" type="email" required autocomplete="email" /></div>' +
+        '<div class="pre__f"><label for="pre-whats">WhatsApp (Com DDD)</label><input id="pre-whats" name="phone" type="tel" placeholder="(11) 99999-9999" required maxlength="15" inputmode="numeric" autocomplete="tel" /></div>' +
+        '<div class="pre__err" role="alert"></div>' +
+        '<button type="submit" class="btn">FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE</button>' +
+      '</form>' +
+      '<div class="pre__ok" role="status"><i>&#10003;</i><h2>Tudo certo!</h2><p class="pre__sub"></p></div>' +
+      '<p class="pre__foot">Protegido por iducali · Captura segura de leads</p>' +
+    '</div>';
+  document.body.appendChild(dlg);
+
+  var form = dlg.querySelector('form'), erro = dlg.querySelector('.pre__err'), ok = dlg.querySelector('.pre__ok'),
+      btn = form.querySelector('button[type=submit]'), whats = form.elements.phone, atual = null;
+
+  function falha(msg, campo) {
+    erro.textContent = msg;
+    erro.style.display = 'block';
+    if (campo) { campo.setAttribute('aria-invalid', 'true'); campo.focus(); }
+  }
+  function abrir(n) {
+    atual = OPCOES[n];
+    dlg.querySelector('.pre__label').textContent = atual.rotulo;
+    btn.className = 'btn ' + atual.cor;
+    form.style.display = '';
+    ok.style.display = 'none';
+    erro.style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE';
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+    form.elements.crmestado.focus();
+  }
+  function fechar() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-pre]');
+    if (!a || !OPCOES[a.getAttribute('data-pre')]) return;
+    e.preventDefault();
+    abrir(a.getAttribute('data-pre'));
+  });
+  dlg.querySelector('.pre__x').addEventListener('click', fechar);
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) fechar(); });
+
+  whats.addEventListener('input', function () {
+    var d = this.value.replace(/\D/g, '').slice(0, 11);
+    this.value = d.length <= 2 ? (d ? '(' + d : '') : d.length <= 6 ? '(' + d.slice(0, 2) + ') ' + d.slice(2)
+      : d.length <= 10 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6) : '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+  });
+  form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); erro.style.display = 'none'; });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    erro.style.display = 'none';
+    var f = form.elements, lead = {
+      crmestado: f.crmestado.value.trim(), name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim()
+    };
+    if (!lead.crmestado) return falha('Informe seu CRM e o estado.', f.crmestado);
+    if (!lead.name) return falha('Informe seu nome completo.', f.name);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lead.email)) return falha('E-mail inválido.', f.email);
+    var tel = lead.phone.replace(/\D/g, '');
+    if (tel.length < 10 || tel.length > 11) return falha('WhatsApp inválido. Use o formato (XX) XXXXX-XXXX com DDD.', f.phone);
+
+    var opcao = atual;
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    fetch(TRACK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      credentials: 'omit',
+      body: JSON.stringify({
+        event: 'lead',
+        lead_data: { name: lead.name, email: lead.email, phone: lead.phone, crmestado: lead.crmestado, custom_fields: { crmestado: lead.crmestado } },
+        url: location.href, parent_url: location.href, referrer: document.referrer,
+        utm_params: utms(), source: 'hosted_form', form_slug: opcao.slug, form_id: opcao.id,
+        timestamp: new Date().toISOString()
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('Falha no envio (' + r.status + ')');
+      return r.json().catch(function () { return {}; });
+    }).then(function (b) {
+      if (b && b.lead_skipped_reason === 'missing_email') throw new Error('sem e-mail');
+      if (opcao.checkout) { location.href = linkDoCheckout(opcao.checkout, lead, b && b.lead_id); return; }
+      form.style.display = 'none';
+      ok.querySelector('.pre__sub').textContent = MSG_OK;
+      ok.style.display = 'block';
+    }).catch(function (err) {
+      console.error('Pré-checkout:', err);
+      falha('Não foi possível enviar agora. Tente novamente em instantes.');
+      btn.disabled = false;
+      btn.textContent = 'FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE';
+    });
+  });
 })();
 </script>
 <!-- ed:gerado (o painel refaz esta parte; edite fora dela) -->
