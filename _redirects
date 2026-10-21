@@ -7,5 +7,5 @@
 /links/* / 301
 /cg-seguidores/* /cg-novoseguidores/:splat 301
 
-# Botão "adicione no Google Agenda" da página /obrigado/ (Black November: 12/11 às 20h de Brasília = 23h UTC).
-/agenda https://calendar.google.com/calendar/render?action=TEMPLATE&text=Abertura%20das%20vagas%20%E2%80%94%20Black%20November%20das%20Pequenas%20Cirurgias&dates=20261112T230000Z/20261113T000000Z&details=Abertura%20das%20vagas%20da%20Black%20November%20das%20Pequenas%20Cirurgias%2C%20com%20a%20Dra.%20Lulma%20Bhering.&location=https%3A%2F%2Fdralulmabhering.com.br 302
+# Botão "adicione no Google Agenda" da página /obrigado/ (Black November: 12/11 às 20h, evento da cliente).
+/agenda https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BABERTURA%20DA%20BLACK%20NOVEMBER%20DAS%20PEQUENAS%20CIRURGIAS%20-%20POR%20DRA.%20LULMA%5D&dates=20261112T200000/20261112T210000&ctz=America%2FSao_Paulo&details=Abertura%20das%20vagas%20no%20dia%2012%2F11%20%C3%A0s%2020h%20atrav%C3%A9s%20do%20link%20abaixo%3A%0Ahttps%3A%2F%2Fdralulmabhering.com.br%2Fpv-lc042026-fpczv1%3Futm_source%3Dga%26utm_medium%3Dorganic%26utm_campaign%3Dlc042026dralulma%26utm_content%3Dga 302
