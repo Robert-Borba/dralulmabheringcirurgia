@@ -768,7 +768,7 @@ body.modal-open{overflow:hidden}
   .hero__top{align-items:center}
 }
 /* lista com número ímpar de itens: o último ocupa a linha toda (sem buraco na grade) */
-.attn__g>.attn__i:last-child:nth-child(odd){grid-column:1/-1}
+@media (min-width:840px){ .attn__g>.attn__i:last-child:nth-child(odd){grid-column:1/-1;justify-content:center;text-align:center} }
 /* botões sempre em 1 linha: a fonte diminui só o necessário (script caberBotoes) */
 .btn,.sf input[type=submit]{white-space:nowrap}
 .hero__cta{width:min(100%,540px)}
