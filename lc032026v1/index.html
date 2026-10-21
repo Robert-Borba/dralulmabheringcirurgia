@@ -540,6 +540,16 @@ body.modal-open{overflow:hidden}
 
 /* botões do CTA em caixa alta */
 .btn{text-transform:uppercase}
+/* botões sempre em 1 linha: a fonte diminui só o necessário (script caberBotoes) */
+.btn,.sf input[type=submit]{white-space:nowrap}
+.hero__cta{width:min(100%,540px)}
+.final .btn{width:min(100%,540px)}
+.hero h1{text-wrap:balance}
+.nq{white-space:nowrap}
+@media (max-width:600px){
+  .btn--lg,.btn--block,.sf input[type=submit]{padding-left:1rem;padding-right:1rem;letter-spacing:0}
+  .attn__cta .btn,.videolist__cta .btn{width:calc(100% + 1.2rem);margin-left:-.6rem}
+}
 </style>
 <!-- iducali — pixel de lead -->
 <script async="true">
@@ -1036,6 +1046,30 @@ var CONFIG = {
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
+})();
+</script>
+<script>
+/* Botões em 1 linha: mede o texto e diminui a fonte até caber na largura do botão. */
+(function(){
+  var ctx = document.createElement('canvas').getContext('2d');
+  function caber(b){
+    b.style.fontSize = '';
+    var cs = getComputedStyle(b);
+    var livre = b.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if (livre <= 0) return;
+    var txt = (b.value || b.textContent).trim().replace(/\s+/g, ' ').toUpperCase();
+    var fs = parseFloat(cs.fontSize), ls = parseFloat(cs.letterSpacing) || 0;
+    var larg = function(f){ ctx.font = cs.fontWeight + ' ' + f + 'px ' + cs.fontFamily; return ctx.measureText(txt).width + ls * f / parseFloat(cs.fontSize) * txt.length; };
+    while (fs > 8 && larg(fs) > livre) fs -= .25;
+    if (fs < parseFloat(cs.fontSize)) b.style.fontSize = fs + 'px';
+  }
+  function todos(){ document.querySelectorAll('.btn, .sf input[type=submit]').forEach(caber); }
+  var ro = 'ResizeObserver' in window ? new ResizeObserver(function(es){ es.forEach(function(e){ caber(e.target); }); }) : null;
+  function ligar(){ todos(); if (ro) document.querySelectorAll('.btn, .sf input[type=submit]').forEach(function(b){ ro.observe(b); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ligar); else window.addEventListener('load', ligar);
+  window.addEventListener('resize', todos);
+  new MutationObserver(function(){ document.querySelectorAll('.sf input[type=submit]').forEach(function(b){ if (ro) ro.observe(b); caber(b); }); })
+    .observe(document.body, { childList: true, subtree: true });
 })();
 </script>
 </body>
