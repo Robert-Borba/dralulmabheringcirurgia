@@ -6,3 +6,6 @@
 /v2/* /pv-pptformacaopczv1/ 301
 /links/* / 301
 /cg-seguidores/* /cg-novoseguidores/:splat 301
+
+# Botão "adicione no Google Agenda" da página /obrigado/ (Black November: 12/11 às 20h de Brasília = 23h UTC).
+/agenda https://calendar.google.com/calendar/render?action=TEMPLATE&text=Abertura%20das%20vagas%20%E2%80%94%20Black%20November%20das%20Pequenas%20Cirurgias&dates=20261112T230000Z/20261113T000000Z&details=Abertura%20das%20vagas%20da%20Black%20November%20das%20Pequenas%20Cirurgias%2C%20com%20a%20Dra.%20Lulma%20Bhering.&location=https%3A%2F%2Fdralulmabhering.com.br 302
