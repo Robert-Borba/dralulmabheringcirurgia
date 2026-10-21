@@ -80,6 +80,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- passos ---------- */
 .steps{display:grid;gap:clamp(1rem,2.5vw,1.5rem);margin-top:clamp(2rem,5vw,3rem)}
+.steps>*{min-width:0}  /* botão que não quebra linha não pode alargar a coluna */
 .card{
   position:relative;padding:clamp(1.4rem,3.2vw,2rem);border-radius:20px;
   border:1px solid var(--line);background:linear-gradient(180deg,rgba(16,14,10,.86),rgba(9,9,12,.86));
@@ -100,7 +101,7 @@ a{color:inherit;text-decoration:none}
   font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;
   background:linear-gradient(135deg,#F3DFB0,var(--gold));color:#1E1503;font-size:.8rem;font-weight:900;
 }
-.card__t{margin-top:.9rem;font-weight:800;letter-spacing:-.015em;line-height:1.4;font-size:clamp(1rem,2.5vw,1.18rem)}
+.card__t{text-wrap:balance;margin-top:.9rem;font-weight:800;letter-spacing:-.015em;line-height:1.4;font-size:clamp(1rem,2.5vw,1.18rem)}
 .card__t b{color:var(--gold-lt)}
 .card__p{margin-top:.8rem;color:var(--muted);font-size:.95rem;line-height:1.7}
 
@@ -148,7 +149,7 @@ a{color:inherit;text-decoration:none}
 .cd-sec__t{font-size:clamp(.68rem,1.9vw,.78rem);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:1.6}
 .cd-sec__t b{color:var(--gold-lt)}
 .btn--agenda{
-  display:flex;width:min(100%,40rem);margin:clamp(1.5rem,3.2vw,2.1rem) auto 0;
+  display:flex;width:100%;margin:1.3rem 0 0;
   padding:1.15rem 2.2rem;white-space:nowrap;animation:none;
   font-size:clamp(.66rem,2.6vw,.82rem);letter-spacing:.04em;line-height:1.45;
   box-shadow:0 14px 38px -18px rgba(199,164,103,.85),inset 0 1px 0 rgba(255,255,255,.5);
@@ -176,6 +177,8 @@ a{color:inherit;text-decoration:none}
 
 @media (max-width:600px){
   .btn,.btn--agenda{padding-left:1rem;padding-right:1rem;letter-spacing:0}
+  /* no celular o texto da agenda em 1 linha ficaria com letra de 8px: aqui ele quebra em 2, equilibrado */
+  .btn--agenda{white-space:normal;text-wrap:balance;text-align:center;font-size:.74rem;line-height:1.4}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -216,23 +219,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- PASSO 1 -->
     <section class="card card--hi">
       <p class="card__n"><em>1</em> Assista ao vídeo</p>
-      <h2 class="card__t"><b>ASSISTA AO VÍDEO RÁPIDO ABAIXO</b> para saber todos os detalhes desta Black November das Pequenas Cirurgias:</h2>
+      <h2 class="card__t"><b>ASSISTA AO VÍDEO RÁPIDO ABAIXO</b> para saber todos os detalhes desta Black November das Pequenas Cirurgias, como valor, condições, cupons e muito mais!</h2>
 
       <div class="video">
-        <iframe src="https://www.youtube.com/embed/DfzLtVDYTJk?rel=0&amp;modestbranding=1"
+        <iframe src="https://www.youtube.com/embed/DfzLtVDYTJk?rel=0&amp;modestbranding=1&amp;playsinline=1"
                 title="Black November das Pequenas Cirurgias"
-                loading="lazy" allowfullscreen
+                allowfullscreen
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
       </div>
+    </section>
+
+    <!-- INSCRIÇÃO -->
+    <section class="card card--hi" id="card6">
+      <h2 class="card__t">Já decidiu garantir a sua vaga na Black November?</h2>
+      <p class="card__p">Aperte o botão abaixo e entre.</p>
+
+      <a class="btn" id="ctaInscricao" href="#" data-link-pendente>Já vou fazer a minha inscrição</a>
     </section>
 
     <!-- PASSO 2 -->
     <section class="card">
       <p class="card__n"><em>2</em> Vaga personalizada</p>
       <h2 class="card__t">Quero liberar as vagas de forma personalizada para você!</h2>
-      <p class="card__p">Após assistir ao vídeo acima, aperte o botão abaixo. Suas respostas vão me ajudar a direcionar melhor os conteúdos e as orientações que vou preparar para você nesta 10ª turma.</p>
+      <p class="card__p">Aperte o botão abaixo. Suas respostas vão me ajudar a direcionar melhor os conteúdos e as orientações que vou preparar para você nesta 10ª turma.</p>
 
       <a class="btn" id="cta2" href="#">Quero minha vaga personalizada</a>
+    </section>
+
+    <!-- PASSO 3 -->
+    <section class="card">
+      <p class="card__n"><em>3</em> Google Agenda</p>
+      <h2 class="card__t">Aperte o botão abaixo e adicione a abertura das vagas no seu Google Agenda.</h2>
+
+      <a class="btn btn--agenda" href="https://dralulmabhering.com.br/agenda" target="_blank" rel="noopener">Clique aqui e adicione a abertura das vagas no seu Google Agenda</a>
     </section>
 
   </div>
@@ -247,9 +266,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="cd__u"><div class="cd__n" data-cd="m"></div><div class="cd__l">Minutos</div></div>
       <div class="cd__u"><div class="cd__n" data-cd="s"></div><div class="cd__l">Segundos</div></div>
     </div>
-    <a class="btn btn--agenda" href="https://dralulmabhering.com.br/agenda" target="_blank" rel="noopener">
-      Clique aqui e adicione a abertura das vagas no seu Google Agenda
-    </a>
   </div>
 </section>
 
@@ -263,7 +279,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 var CONFIG = {
   deadline: '2026-11-12T20:00:00-03:00',  /* abertura, horário de Brasília */
-  ctaUrl: 'https://sistema.iducali.com.br/survey/12?origem=pgo'  /* link do "Quero minha vaga personalizada" */
+  ctaUrl: 'https://sistema.iducali.com.br/survey/12?origem=pgo',  /* link do "Quero minha vaga personalizada" */
+  inscricaoUrl: ''    /* link do "Já vou fazer a minha inscrição" (falta a cliente mandar) */
 };
 
 (function(){
@@ -316,6 +333,11 @@ var CONFIG = {
   tick();
   setInterval(tick, 1000);
 
+  /* ---------- botão do card da inscrição ---------- */
+  var ctaIns = document.getElementById('ctaInscricao');
+  if (CONFIG.inscricaoUrl) { ctaIns.href = CONFIG.inscricaoUrl; ctaIns.removeAttribute('data-link-pendente'); }
+  else ctaIns.addEventListener('click', function(e){ e.preventDefault(); });
+
   /* ---------- botão do passo 2 ---------- */
   var cta2 = document.getElementById('cta2');
   if (CONFIG.ctaUrl) cta2.href = CONFIG.ctaUrl;
@@ -337,7 +359,7 @@ var CONFIG = {
     while (fs > 8 && larg(fs) > livre) fs -= .25;
     if (fs < parseFloat(cs.fontSize)) b.style.fontSize = fs + 'px';
   }
-  function todos(){ document.querySelectorAll('.btn').forEach(caber); }
+  function todos(){ document.querySelectorAll('.btn').forEach(function(b){ if (getComputedStyle(b).whiteSpace === 'nowrap') caber(b); else b.style.fontSize = ''; }); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(todos); else window.addEventListener('load', todos);
   window.addEventListener('resize', todos);
 })();
