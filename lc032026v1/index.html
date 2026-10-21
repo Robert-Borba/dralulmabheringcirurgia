@@ -550,6 +550,12 @@ body.modal-open{overflow:hidden}
   .btn--lg,.btn--block,.sf input[type=submit]{padding-left:1rem;padding-right:1rem;letter-spacing:0}
   .attn__cta .btn,.videolist__cta .btn{width:calc(100% + 1.2rem);margin-left:-.6rem}
 }
+
+/* formulário Iducali (captacao-lc042026) */
+.sf__f{margin-bottom:.8rem;text-align:left}
+.sf__f label{display:block;margin-bottom:.35rem;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sf__err{margin-top:.4rem;padding:.65rem .8rem;border-radius:10px;border:1px solid rgba(210,104,90,.45);background:rgba(210,104,90,.1);color:#F0B5AC;font-size:.8rem;text-align:left}
+.sf input[type=submit][disabled]{opacity:.7;cursor:not-allowed}
 </style>
 <!-- iducali — pixel de lead -->
 <script async="true">
@@ -869,33 +875,292 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </button>
 
     <img class="modal__logo" src="logo-november.webp?v=2" alt="Black November das Pequenas Cirurgias" width="272" height="141" />
-    <h2 class="modal__t" id="modalT">Faça sua pré-inscrição</h2>
-    <p class="modal__s">Preencha para liberar o vídeo exclusivo dos pré-inscritos.</p>
+    <h2 class="modal__t" id="modalT">Estamos quase lá...</h2>
+    <p class="modal__s">Preencha os dados abaixo para finalizar sua pré-inscrição.</p>
 
-    <form class="sf" method="post" action="https://webhook.sellflux.app/v2/webhook/form/ce9e8dc8a961356d7624f1f463edafb5?not_query=true&redirect_url=https%3A%2F%2Fdralulmabhering.com.br%2Fobrigado%2F">
-      <div class="container_html">
-        <div style="margin-bottom:.8rem">
-          <input type="text" id="name-2" name="name" value="" placeholder="Insira seu nome" required />
-        </div>
-        <div style="margin-bottom:.8rem">
-          <input type="email" id="email-2" name="email" value="" placeholder="Insira seu melhor e-mail" required />
-        </div>
-        <div class="form-group-2">
-          <select class="form-control" id="ddi-2"></select>
-          <input data-phone-with-ddi="" type="tel" id="tel-2" name="phone" maxlength="15" placeholder="(00) 00000-0000" required />
-        </div>
-        <div style="margin-bottom:.8rem">
-          <input type="text" id="custom-crm-2-0" name="crm" placeholder="NRº CRM/Estado" required />
-        </div>
-        <input type="submit" value="Quero fazer minha pré-inscrição" />
-      </div>
+    <form class="sf" id="leadForm" data-iducali-hosted-form="1" novalidate>
+      <div class="sf__f"><label for="f_c">CRM/ESTADO</label><input id="f_c" name="c" type="text" placeholder="" required autocomplete="off" /></div>
+      <div class="sf__f"><label for="f_name">Nome completo</label><input id="f_name" name="name" type="text" placeholder="" required autocomplete="off" /></div>
+      <div class="sf__f"><label for="f_email">E-mail</label><input id="f_email" name="email" type="email" placeholder="" required autocomplete="off" /></div>
+      <div class="sf__f"><label for="f_phone">WhatsApp (Com DDD)</label><input id="f_phone" name="phone" type="tel" placeholder="(11) 99999-9999" required maxlength="15" inputmode="numeric" autocomplete="tel" /></div>
+      <div class="sf__err" id="formError" hidden></div>
+      <input type="submit" id="submitBtn" value="FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE" />
     </form>
-
-    <p class="modal__note">Pré-inscrição gratuita · 10ª turma · 12 de novembro, às 20h</p>
+    <p class="modal__note">Protegido por iducali · Captura segura de leads</p>
   </div>
 </div>
 
-<script src="https://webhook.sellflux.app/v2/script_form.js"></script>
+<script>
+/* Formulário da Iducali (captacao-lc042026): mesma lógica do embed enviado pela cliente. */
+(function() {
+  'use strict';
+
+  var TRACK_URL = "https://sistema.iducali.com.br/backend/api/pixel/cgQBInPZhHNvpgn7/track";
+  var SUCCESS_MESSAGE = "Pré-inscrição recebida com sucesso!";
+  var SUCCESS_REDIRECT = "https://dralulmabhering.com.br/obrigado/";
+  var PREFILL_CHECKOUT = false;
+  var FORM_SLUG = "captacao-lc042026";
+  var FORM_ID = "e2d6490c-7a48-400d-9092-495ac248f88b";
+  var DEFAULT_FIELDS = {"name":true,"email":true,"phone":true};
+  var CUSTOM_FIELD_NAMES = ["c"];
+  var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','iducali_source','iducali_ad_id','gclid','fbclid','xcod','sck','src'];
+  var lastLeadData = {};
+  var lastLeadId = null;
+  var submitting = false;
+
+  function newClientEventId() {
+    try {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    } catch (e) {}
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  function readStoredUtm(key) {
+    try {
+      var v = localStorage.getItem('idc' + key);
+      if (!v) return '';
+      var exp = localStorage.getItem('idc' + key + '_exp');
+      if (!exp || new Date(exp) < new Date()) {
+        localStorage.removeItem('idc' + key);
+        localStorage.removeItem('idc' + key + '_exp');
+        return '';
+      }
+      return v;
+    } catch (e) { return ''; }
+  }
+
+  function parseUtmsFromSearch(searchStr) {
+    var params = {};
+    if (!searchStr) return params;
+    try {
+      var q = searchStr.charAt(0) === '?' ? searchStr.slice(1) : searchStr;
+      var idx = q.indexOf('#');
+      if (idx >= 0) q = q.slice(0, idx);
+      var search = new URLSearchParams(q);
+      UTM_KEYS.forEach(function(k) {
+        if (!search.has(k)) return;
+        var val = search.get(k) || '';
+        if (val === 'null' || val === 'undefined') val = '';
+        if (val) params[k] = val;
+      });
+    } catch (e) {}
+    return params;
+  }
+
+  function mergeUtms() {
+    var out = {};
+    var fromPage = parseUtmsFromSearch(window.location.search);
+    var urlHasUtm = Object.keys(fromPage).length > 0;
+    UTM_KEYS.forEach(function(k) {
+      var val = fromPage[k] || '';
+      if (!val && !urlHasUtm) val = readStoredUtm(k);
+      if (val) out[k] = val;
+    });
+    return out;
+  }
+
+  function readUtms() {
+    return mergeUtms();
+  }
+
+  function appendLeadPrefill(u, lead) {
+    if (!u || !lead) return;
+    var name = (lead.name || '').toString().trim();
+    var email = (lead.email || '').toString().trim();
+    var phoneDigits = (lead.phone || '').toString().replace(/\D/g, '');
+    if (phoneDigits.length >= 12 && phoneDigits.indexOf('55') === 0) {
+      phoneDigits = phoneDigits.slice(2);
+    }
+    if (name && !u.searchParams.has('name')) u.searchParams.set('name', name);
+    if (email && !u.searchParams.has('email')) u.searchParams.set('email', email);
+    if (phoneDigits.length >= 10) {
+      var ac = phoneDigits.slice(0, 2);
+      var number = phoneDigits.slice(2);
+      if (!u.searchParams.has('phoneac')) u.searchParams.set('phoneac', ac);
+      if (!u.searchParams.has('phonenumber')) u.searchParams.set('phonenumber', number);
+      if (!u.searchParams.has('phone')) u.searchParams.set('phone', phoneDigits);
+    }
+  }
+
+  function appendCheckoutUrl(url, leadId) {
+    if (!url) return url;
+    try {
+      if (window._iducaliUtms && typeof window._iducaliUtms.append === 'function') {
+        url = window._iducaliUtms.append(url);
+      }
+    } catch (e) {}
+    try {
+      var utm = mergeUtms();
+      var u = new URL(url);
+      Object.keys(utm).forEach(function(k) {
+        if (!u.searchParams.has(k) && utm[k]) u.searchParams.set(k, utm[k]);
+      });
+      if (leadId && !u.searchParams.has('lead_id')) {
+        u.searchParams.set('lead_id', String(leadId));
+      }
+      var sep = 'hQ21xR';
+      var packed = [
+        utm.utm_source || '', utm.utm_campaign || '', utm.utm_medium || '',
+        utm.utm_content || '', utm.utm_term || ''
+      ].join(sep);
+      if (packed.replace(new RegExp(sep, 'g'), '') !== '') {
+        if (!u.searchParams.has('xcod')) u.searchParams.set('xcod', packed);
+        if (!u.searchParams.has('sck')) u.searchParams.set('sck', packed);
+        if (!u.searchParams.has('src')) u.searchParams.set('src', utm.src || packed);
+      } else if (utm.src && !u.searchParams.has('src')) {
+        u.searchParams.set('src', utm.src);
+      }
+      if (PREFILL_CHECKOUT) {
+        appendLeadPrefill(u, lastLeadData);
+      }
+      return u.toString();
+    } catch (e2) {
+      return url;
+    }
+  }
+
+  function showError(msg) {
+    var el = document.getElementById('formError');
+    el.textContent = msg;
+    el.hidden = false;
+  }
+  function hideError() {
+    var el = document.getElementById('formError');
+    el.hidden = true;
+    el.textContent = '';
+  }
+
+  function showSuccess() {
+    if (SUCCESS_REDIRECT && /^https?:\/\//i.test(SUCCESS_REDIRECT)) {
+      window.location.href = appendCheckoutUrl(SUCCESS_REDIRECT, lastLeadId);
+      return;
+    }
+    var btn = document.getElementById('submitBtn');
+    btn.value = SUCCESS_MESSAGE;
+  }
+
+  (function() {
+    var ph = document.getElementById('f_phone');
+    if (!ph) return;
+    function maskPhone(v) {
+      var d = v.replace(/\D/g, '').substring(0, 11);
+      if (d.length <= 2)  return '(' + d;
+      if (d.length <= 6)  return '(' + d.slice(0,2) + ') ' + d.slice(2);
+      if (d.length <= 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6);
+      return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+    }
+    ph.addEventListener('input', function() {
+      var pos = this.selectionStart, old = this.value.length;
+      this.value = maskPhone(this.value);
+      this.selectionStart = this.selectionEnd = pos + (this.value.length - old);
+    });
+    ph.addEventListener('keydown', function(e) {
+      if ([8, 9, 13, 27, 46].indexOf(e.keyCode) !== -1) return;
+      if ((e.ctrlKey || e.metaKey) && [65, 67, 86, 88].indexOf(e.keyCode) !== -1) return;
+      if (e.keyCode >= 35 && e.keyCode <= 39) return;
+      if ((e.shiftKey || e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+      }
+    });
+  })();
+
+  var form = document.getElementById('leadForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (submitting) return;
+    hideError();
+
+    var formData = new FormData(form);
+    var leadData = {};
+    var customFields = {};
+
+    if (DEFAULT_FIELDS.name) leadData.name = (formData.get('name') || '').toString().trim();
+    if (DEFAULT_FIELDS.email) leadData.email = (formData.get('email') || '').toString().trim();
+    if (DEFAULT_FIELDS.phone) leadData.phone = (formData.get('phone') || '').toString().trim();
+
+    CUSTOM_FIELD_NAMES.forEach(function(name) {
+      var val = (formData.get(name) || '').toString().trim();
+      if (val !== '') {
+        customFields[name] = val;
+        leadData[name] = val;
+      }
+    });
+
+    if (DEFAULT_FIELDS.email && !leadData.email) {
+      showError('Por favor, informe um e-mail válido.');
+      return;
+    }
+    if (DEFAULT_FIELDS.email && leadData.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(leadData.email)) {
+      showError('E-mail inválido.');
+      return;
+    }
+
+    if (DEFAULT_FIELDS.phone && leadData.phone) {
+      var phoneDigits = leadData.phone.replace(/\D/g, '');
+      if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+        showError('WhatsApp inválido. Use o formato (XX) XXXXX-XXXX com DDD.');
+        return;
+      }
+    }
+
+    if (Object.keys(customFields).length > 0) {
+      leadData.custom_fields = customFields;
+    }
+
+    var payload = {
+      event: 'lead',
+      lead_data: leadData,
+      url: window.location.href,
+      parent_url: window.location.href,
+      referrer: document.referrer,
+      utm_params: readUtms(),
+      source: 'hosted_form',
+      form_slug: FORM_SLUG,
+      form_id: FORM_ID,
+      client_event_id: newClientEventId(),
+      timestamp: new Date().toISOString()
+    };
+
+    var btn = document.getElementById('submitBtn');
+    submitting = true;
+    btn.disabled = true;
+    var originalText = btn.value;
+    btn.value = 'Enviando...';
+
+    fetch(TRACK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'omit'
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Falha no envio (' + res.status + ')');
+      return res.json().catch(function() { return {}; });
+    }).then(function(body) {
+      if (body && body.lead_skipped_reason === 'missing_email') {
+        showError('O lead não foi gravado: e-mail é obrigatório.');
+        submitting = false;
+        btn.disabled = false;
+        btn.value = originalText;
+        return;
+      }
+      if (body && body.lead_id) {
+        lastLeadId = body.lead_id;
+      }
+      lastLeadData = leadData;
+      showSuccess();
+    }).catch(function(err) {
+      console.error('Lead form error:', err);
+      showError('Não foi possível enviar agora. Tente novamente em instantes.');
+      submitting = false;
+      btn.disabled = false;
+      btn.value = originalText;
+    });
+  });
+})();
+</script>
 
 <script>
 /* ============================================================
