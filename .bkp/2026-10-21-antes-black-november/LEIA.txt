@@ -1,0 +1,3 @@
+Bkp das páginas da Black Antecipada (setembro), antes das mudanças da Black November (12/11).
+Pasta com ponto: o build do editor ignora, então não vai ao ar.
+Para voltar: copiar o index.html daqui para /lc032026v1/ ou /lc032026v2/.
