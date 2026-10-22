@@ -1129,12 +1129,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var originalText = btn.value;
     btn.value = 'Enviando...';
 
+    // nunca fica "Enviando..." para sempre: sem resposta em 15 s, avisa e libera o botão
+    var ctl = window.AbortController ? new AbortController() : null;
+    var limite = setTimeout(function() { if (ctl) ctl.abort(); }, 15000);
     fetch(TRACK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload),
-      credentials: 'omit'
+      credentials: 'omit',
+      signal: ctl ? ctl.signal : undefined
     }).then(function(res) {
+      clearTimeout(limite);
       if (!res.ok) throw new Error('Falha no envio (' + res.status + ')');
       return res.json().catch(function() { return {}; });
     }).then(function(body) {
@@ -1151,12 +1156,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       lastLeadData = leadData;
       showSuccess();
     }).catch(function(err) {
+      clearTimeout(limite);
       console.error('Lead form error:', err);
       showError('Não foi possível enviar agora. Tente novamente em instantes.');
       submitting = false;
       btn.disabled = false;
       btn.value = originalText;
     });
+  });
+
+  // Voltar do checkout/obrigado: o navegador devolve a página como estava, com o envio
+  // "em andamento". Sem isto o botão ficava em "Enviando..." e não enviava mais (2026-10-22).
+  window.addEventListener('pageshow', function() {
+    submitting = false;
+    var b = document.getElementById('submitBtn');
+    b.disabled = false;
+    b.value = 'FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE';
+    hideError();
   });
 })();
 </script>
