@@ -9,3 +9,5 @@
 
 # Botão "adicione no Google Agenda" da página /obrigado/ (Black November: 12/11 às 20h, evento da cliente).
 /agenda https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BABERTURA%20DA%20BLACK%20NOVEMBER%20DAS%20PEQUENAS%20CIRURGIAS%20-%20POR%20DRA.%20LULMA%5D&dates=20261112T200000/20261112T210000&ctz=America%2FSao_Paulo&details=Abertura%20das%20vagas%20no%20dia%2012%2F11%20%C3%A0s%2020h%20atrav%C3%A9s%20do%20link%20abaixo%3A%0Ahttps%3A%2F%2Fdralulmabhering.com.br%2Fpv-lc042026-fpczv1%3Futm_source%3Dga%26utm_medium%3Dorganic%26utm_campaign%3Dlc042026dralulma%26utm_content%3Dga 302
+/cp032026v1 /cp042026v1/ 301
+/cp032026v1/* /cp042026v1/:splat 301
