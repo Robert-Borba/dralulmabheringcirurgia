@@ -786,7 +786,7 @@ body.modal-open{overflow:hidden}
 .sf input[type=submit][disabled]{opacity:.7;cursor:not-allowed}
 .attn__cta.sf__caixa{width:min(100%,460px);max-width:460px;margin-inline:auto}
 .sf__nota{margin-top:1rem;text-align:center;font-size:.68rem;color:rgba(155,149,137,.85)}
-#preinscricao{scroll-margin-top:90px}
+#formPre{scroll-margin-top:90px}
 </style>
 <!-- iducali — pixel de lead -->
 <script async="true">
@@ -1077,7 +1077,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="attn__p">Faça sua pré-inscrição apertando o botão abaixo.</p>
 
-      <div class="attn__cta sf__caixa" id="preinscricao">
+      <div class="attn__cta sf__caixa" id="formPre">
     <form class="sf" id="leadForm" data-iducali-hosted-form="1" novalidate>
       <div class="sf__f"><label for="f_c">CRM/ESTADO</label><input id="f_c" name="c" type="text" placeholder="" required autocomplete="off" /></div>
       <div class="sf__f"><label for="f_name">Nome completo</label><input id="f_name" name="name" type="text" placeholder="" required autocomplete="off" /></div>
@@ -1636,6 +1636,50 @@ var CONFIG = {
     b.value = 'FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE';
     hideError();
   });
+})();
+</script>
+
+<!-- ===== JANELA DO FORMULÁRIO (botão da barra do topo) ===== -->
+<div class="modal" id="modalPre" hidden role="dialog" aria-modal="true" aria-labelledby="modalPreT">
+  <div class="modal__bg" data-close></div>
+  <div class="modal__box">
+    <button class="modal__x" type="button" data-close aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h2 class="modal__t" id="modalPreT">Estamos quase lá...</h2>
+    <p class="modal__s">Preencha os dados abaixo para finalizar sua pré-inscrição.</p>
+    <div id="modalPreSlot"></div>
+  </div>
+</div>
+
+<script>
+/* O botão da barra do topo abre o formulário numa janela. É o mesmo formulário da seção
+   "Ainda não fez a sua pré-inscrição": ele sobe para a janela e volta ao fechar. */
+(function(){
+  var botao = document.querySelector('.sticky .sbtn');
+  var casa = document.getElementById('formPre');
+  var modal = document.getElementById('modalPre');
+  var slot = document.getElementById('modalPreSlot');
+  if (!botao || !casa || !modal) return;
+  function abrir(e){
+    e.preventDefault();
+    while (casa.firstChild) slot.appendChild(casa.firstChild);
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    var c = document.getElementById('f_c'); if (c) c.focus();
+    window.dispatchEvent(new Event('resize'));
+  }
+  function fechar(){
+    if (modal.hidden) return;
+    while (slot.firstChild) casa.appendChild(slot.firstChild);
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    window.dispatchEvent(new Event('resize'));
+  }
+  botao.addEventListener('click', abrir);
+  [].slice.call(modal.querySelectorAll('[data-close]')).forEach(function(x){ x.addEventListener('click', fechar); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') fechar(); });
+  addEventListener('pageshow', fechar);
 })();
 </script>
 </body>
