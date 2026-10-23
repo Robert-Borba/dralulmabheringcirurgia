@@ -76,7 +76,8 @@ a{color:inherit;text-decoration:none}
 /* ---------- título ---------- */
 .head{text-align:center;margin-top:clamp(2rem,5vw,3.2rem)}
 .head h1{text-wrap:balance}
-.video.video--so{margin-top:0}
+.video.video--so{margin-top:0;aspect-ratio:9/16;width:100%;padding:0}
+.card--video{width:min(100%,420px);margin-inline:auto;justify-self:center}
 .head h1{text-wrap:balance;font-weight:800;letter-spacing:-.025em;line-height:1.18;font-size:clamp(1.35rem,4vw,2.1rem)}
 .head h1 span{background:linear-gradient(100deg,var(--gold-lt),var(--gold) 55%,#A9813C);-webkit-background-clip:text;background-clip:text;color:transparent}
 
@@ -227,7 +228,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="steps">
 
     <!-- VÍDEO -->
-    <section class="card card--hi">
+    <section class="card card--hi card--video">
       <div class="video video--so">
         <iframe src="https://www.youtube.com/embed/z-3WboKyAeU?rel=0&amp;modestbranding=1&amp;playsinline=1"
                 title="Black November das Pequenas Cirurgias"
@@ -263,7 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 
 <!-- ===== DÚVIDAS ===== -->
-<section class="duvidas" id="duvidas">
+<section data-libera hidden class="duvidas" id="duvidas">
   <div class="wrap help">
     <img  src="icone-whatsapp.svg" alt="" loading="lazy" width="52" height="52" />
     <h2>Tem alguma dúvida?</h2>
@@ -379,7 +380,7 @@ var CONFIG = {
 })();
 </script>
 <script>
-/* Os botões abaixo do vídeo aparecem 6 minutos depois que a pessoa abriu a página.
+/* Os botões abaixo do vídeo e o contato com a equipe aparecem 6 minutos depois que a pessoa abriu a página.
    A contagem fica guardada: sair e voltar não recomeça. (?liberar=1 mostra na hora, para conferir.) */
 (function(){
   var ESPERA = 6 * 60 * 1000, CHAVE = 'bn-obrigado-desde';
