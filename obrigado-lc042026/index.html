@@ -380,21 +380,17 @@ var CONFIG = {
 })();
 </script>
 <script>
-/* Os botões abaixo do vídeo e o contato com a equipe aparecem 6 minutos depois que a pessoa abriu a página.
-   A contagem fica guardada: sair e voltar não recomeça. (?liberar=1 mostra na hora, para conferir.) */
+/* Os botões abaixo do vídeo e o contato com a equipe aparecem 6 minutos depois que a pessoa
+   abre a página. A contagem recomeça a cada visita. (?liberar=1 mostra na hora, para conferir.) */
 (function(){
-  var ESPERA = 6 * 60 * 1000, CHAVE = 'bn-obrigado-desde';
+  var ESPERA = 6 * 60 * 1000;
   var cards = [].slice.call(document.querySelectorAll('[data-libera]'));
   function liberar(){
     cards.forEach(function(c){ c.hidden = false; });
     window.dispatchEvent(new Event('resize'));   /* os botões recalculam o tamanho da letra */
   }
   if (/[?&]liberar=1/.test(location.search)) { liberar(); return; }
-  var desde = 0;
-  try { desde = +localStorage.getItem(CHAVE) || 0; } catch (e) {}
-  if (!desde) { desde = Date.now(); try { localStorage.setItem(CHAVE, String(desde)); } catch (e) {} }
-  var falta = desde + ESPERA - Date.now();
-  if (falta <= 0) liberar(); else setTimeout(liberar, falta);
+  setTimeout(liberar, ESPERA);
 })();
 </script>
 <!-- avisa o painel de links que este clique virou pré-inscrição -->
