@@ -107,6 +107,10 @@ a{color:inherit;text-decoration:none}
 .card__t b{color:var(--gold-lt)}
 .card__p{margin-top:.8rem;color:var(--muted);font-size:.95rem;line-height:1.7}
 
+/* cards abaixo do vídeo: entram quando liberam (6 min na página) */
+[data-libera]:not([hidden]){animation:libera .7s var(--ease) both}
+@keyframes libera{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+
 /* player do vídeo */
 .video{
   position:relative;margin-top:1.2rem;border-radius:14px;overflow:hidden;
@@ -171,6 +175,25 @@ a{color:inherit;text-decoration:none}
 @keyframes dIn{from{transform:translateY(105%);opacity:0}to{transform:none;opacity:1}}
 .cd__l{margin-top:.45rem;text-align:center;font-size:.55rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
+/* ---------- chamar equipe (igual às páginas de captação) ---------- */
+.duvidas{padding:clamp(3rem,7vw,4.5rem) 0 clamp(1rem,3vw,2rem)}
+.btn.btn--wa{animation:none;background:linear-gradient(135deg,#8FD24A,var(--green) 55%,var(--green-dk));color:#0d1a03;box-shadow:0 14px 36px -14px rgba(125,187,58,.7);margin-top:.3rem}
+.btn.btn--wa::after{display:none}
+.btn.btn--wa:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.help{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.help img{width:52px}
+.help h2{font-weight:800;letter-spacing:-.02em;font-size:clamp(1.35rem,3.4vw,1.9rem)}
+.help p{color:var(--muted);max-width:48ch}
+.nums{display:grid;gap:.4rem;grid-template-columns:repeat(3,1fr);width:min(100%,620px);margin-top:.4rem}
+.nums a{display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.8rem .4rem;border-radius:11px;white-space:nowrap;
+  border:1px solid var(--line);background:var(--panel);font-weight:700;font-size:clamp(.66rem,2.5vw,.92rem);
+  transition:border-color .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.nums a:hover{border-color:var(--gold);color:var(--gold-lt);transform:translateY(-2px)}
+.nums svg{width:13px;height:13px;color:var(--green);flex:none}
+@media (max-width:520px){.nums svg{display:none}}
+.help__warn{margin-top:1rem;font-size:.74rem;color:var(--muted);max-width:52ch;line-height:1.7}
+.help__warn b{color:var(--gold-lt)}
+
 /* ---------- rodapé ---------- */
 .foot{padding:clamp(2rem,5vw,2.8rem) 0 4.5rem;text-align:center}
 .foot__crm{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(155,149,137,.95)}
@@ -214,7 +237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- INSCRIÇÃO -->
-    <section class="card card--hi" id="card6">
+    <section data-libera hidden class="card card--hi" id="card6">
       <h2 class="card__t">Já decidiu garantir a sua vaga na Black November?</h2>
       <p class="card__p">Aperte o botão abaixo e entre.</p>
 
@@ -222,7 +245,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- PASSO 2 -->
-    <section class="card">
+    <section data-libera hidden class="card">
       <h2 class="card__t">Quero liberar as vagas de forma personalizada para você!</h2>
       <p class="card__p">Aperte o botão abaixo. Suas respostas vão me ajudar a direcionar melhor os conteúdos e as orientações que vou preparar para você nesta 10ª turma.</p>
 
@@ -230,7 +253,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- AGENDA -->
-    <section class="card">
+    <section data-libera hidden class="card">
       <h2 class="card__t">Aperte o botão abaixo e adicione a abertura das vagas no seu google agenda.</h2>
 
       <a class="btn btn--agenda" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%5BABERTURA%20DA%20BLACK%20NOVEMBER%20DAS%20PEQUENAS%20CIRURGIAS%20-%20POR%20DRA.%20LULMA%5D&amp;dates=20261112T200000/20261112T210000&amp;ctz=America%2FSao_Paulo&amp;details=Abertura%20das%20vagas%20no%20dia%2012%2F11%20%C3%A0s%2020h%20atrav%C3%A9s%20do%20link%20abaixo%3A%0Ahttps%3A%2F%2Fdralulmabhering.com.br%2Fpv-lc042026-fpczv1%3Futm_source%3Dga%26utm_medium%3Dorganic%26utm_campaign%3Dlc042026dralulma%26utm_content%3Dga" target="_blank" rel="noopener">Clique aqui e adicione a abertura das vagas no seu Google Agenda</a>
@@ -238,6 +261,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   </div>
 </main>
+
+<!-- ===== DÚVIDAS ===== -->
+<section class="duvidas" id="duvidas">
+  <div class="wrap help">
+    <img  src="icone-whatsapp.svg" alt="" loading="lazy" width="52" height="52" />
+    <h2>Tem alguma dúvida?</h2>
+    <p>Aperte o botão abaixo e chame a minha equipe.</p>
+    <a class="btn btn--wa" style="width:min(100%,380px)" target="_blank" rel="noopener" href="https://wa.me/5532999421822?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvida%20da%20Black%20November%20da%20Dra.%20Lulma!">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.2 8.2 0 0 1 8.24 8.24c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.19-.54.06-.25-.12-1.05-.38-1.99-1.23-.74-.65-1.24-1.46-1.38-1.71-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.65 4.21 3.71.59.26 1.05.41 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+      Chamar equipe
+    </a>
+
+    <p class="help__warn"><b>Confie apenas em nossos números oficiais:</b></p>
+    <div class="nums">
+      <a href="https://wa.me/5532999421822?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvida%20da%20Black%20November%20da%20Dra.%20Lulma!" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg>32 9 9942-1822</a>
+      <a href="https://wa.me/5532998430482?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvida%20da%20Black%20November%20da%20Dra.%20Lulma!" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg>32 9 9843-0482</a>
+      <a href="https://wa.me/5532998426276?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvida%20da%20Black%20November%20da%20Dra.%20Lulma!" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg>32 9 9842-6276</a>
+    </div>
+  </div>
+</section>
 
 
 <footer class="foot">
@@ -333,6 +376,24 @@ var CONFIG = {
   function todos(){ document.querySelectorAll('.btn').forEach(function(b){ if (getComputedStyle(b).whiteSpace === 'nowrap') caber(b); else b.style.fontSize = ''; }); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(todos); else window.addEventListener('load', todos);
   window.addEventListener('resize', todos);
+})();
+</script>
+<script>
+/* Os botões abaixo do vídeo aparecem 6 minutos depois que a pessoa abriu a página.
+   A contagem fica guardada: sair e voltar não recomeça. (?liberar=1 mostra na hora, para conferir.) */
+(function(){
+  var ESPERA = 6 * 60 * 1000, CHAVE = 'bn-obrigado-desde';
+  var cards = [].slice.call(document.querySelectorAll('[data-libera]'));
+  function liberar(){
+    cards.forEach(function(c){ c.hidden = false; });
+    window.dispatchEvent(new Event('resize'));   /* os botões recalculam o tamanho da letra */
+  }
+  if (/[?&]liberar=1/.test(location.search)) { liberar(); return; }
+  var desde = 0;
+  try { desde = +localStorage.getItem(CHAVE) || 0; } catch (e) {}
+  if (!desde) { desde = Date.now(); try { localStorage.setItem(CHAVE, String(desde)); } catch (e) {} }
+  var falta = desde + ESPERA - Date.now();
+  if (falta <= 0) liberar(); else setTimeout(liberar, falta);
 })();
 </script>
 <!-- avisa o painel de links que este clique virou pré-inscrição -->
