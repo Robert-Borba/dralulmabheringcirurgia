@@ -108,7 +108,7 @@ a{color:inherit;text-decoration:none}
 .card__t b{color:var(--gold-lt)}
 .card__p{margin-top:.8rem;color:var(--muted);font-size:.95rem;line-height:1.7}
 
-/* cards abaixo do vídeo: entram quando liberam (6 min na página) */
+/* cards abaixo do vídeo: entram quando liberam (6 min 30 s na página) */
 [data-libera]:not([hidden]){animation:libera .7s var(--ease) both}
 @keyframes libera{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
 
@@ -380,10 +380,10 @@ var CONFIG = {
 })();
 </script>
 <script>
-/* Os botões abaixo do vídeo e o contato com a equipe aparecem 6 minutos depois que a pessoa
+/* Os botões abaixo do vídeo e o contato com a equipe aparecem 6 minutos e meio depois que a pessoa
    abre a página. A contagem recomeça a cada visita. (?liberar=1 mostra na hora, para conferir.) */
 (function(){
-  var ESPERA = 6 * 60 * 1000;
+  var ESPERA = 6.5 * 60 * 1000;   /* 6 min 30 s */
   var cards = [].slice.call(document.querySelectorAll('[data-libera]'));
   function liberar(){
     cards.forEach(function(c){ c.hidden = false; });
