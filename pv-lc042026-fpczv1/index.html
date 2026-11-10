@@ -2202,13 +2202,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="pcx__t" id="pcx-titulo">Estamos quase lá...</h2>
     <p class="pcx__s">Preencha os dados abaixo para finalizar sua pré-inscrição.</p>
 
-    <form id="pcx-form" class="pcx__form" data-iducali-hosted-form="1" novalidate>
-      <div><label for="f_c">CRM/ESTADO</label><input id="f_c" name="c" type="text" placeholder="" required autocomplete="off" /></div>
-      <div><label for="f_name">Nome completo</label><input id="f_name" name="name" type="text" placeholder="" required autocomplete="off" /></div>
-      <div><label for="f_email">E-mail</label><input id="f_email" name="email" type="email" placeholder="" required autocomplete="off" /></div>
-      <div><label for="f_phone">WhatsApp (Com DDD)</label><input id="f_phone" name="phone" type="tel" placeholder="(11) 99999-9999" required maxlength="15" inputmode="numeric" autocomplete="tel" /></div>
-      <div class="pcx__err" id="formError" hidden></div>
-      <input type="submit" id="submitBtn" value="FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE" />
+    <form id="pcx-form" class="pcx__form" method="post" action="https://webhook.sellflux.app/v2/webhook/form/494173d4abc57fd7091da79ea08a5b6a">
+      <div class="container_html" style="width:100%"><div style="display:grid;gap:.7rem">
+        <div><input type="text" id="name-3" name="name" value="" placeholder="Nome" required /></div>
+        <div name="fg-email"><input type="text" id="email-3" name="email" value="" placeholder="E-mail" required /></div>
+        <div class="form-group-2">
+          <select class="ddi-selector" id="ddi-3"></select>
+          <input data-phone-with-ddi="" type="tel" id="tel-3" name="phone" maxlength="15" placeholder="(00) 00000-0000" required />
+        </div>
+        <div><input type="text" id="custom-crm-3-0" name="crm" placeholder="CRM/ESTADO" required /></div>
+        <div class="pcx__err" id="formError" hidden></div>
+        <input type="submit" id="submitBtn" value="CONTINUAR" />
+      </div></div>
+      <script src="https://webhook.sellflux.app/v2/script_form.js"></script>
     </form>
     <p class="pcx__foot">Protegido por iducali · Captura segura de leads</p>
   </div>
@@ -2409,65 +2415,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     })();
 
-    pcxForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      if (submitting || !atual) return;
-      hideError();
-      var formData = new FormData(pcxForm);
-      var leadData = {}, customFields = {};
-      leadData.name = (formData.get('name') || '').toString().trim();
-      leadData.email = (formData.get('email') || '').toString().trim();
-      leadData.phone = (formData.get('phone') || '').toString().trim();
-      CUSTOM_FIELD_NAMES.forEach(function(name){
-        var val = (formData.get(name) || '').toString().trim();
-        if (val !== ''){ customFields[name] = val; leadData[name] = val; }
-      });
-      if (!leadData.email){ showError('Por favor, informe um e-mail válido.'); return; }
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(leadData.email)){ showError('E-mail inválido.'); return; }
-      if (leadData.phone){
-        var phoneDigits = leadData.phone.replace(/\D/g, '');
-        if (phoneDigits.length < 10 || phoneDigits.length > 11){ showError('WhatsApp inválido. Use o formato (XX) XXXXX-XXXX com DDD.'); return; }
-      }
-      if (Object.keys(customFields).length > 0) leadData.custom_fields = customFields;
-      var opcao = atual;
-      var payload = {
-        event: 'lead', lead_data: leadData,
-        url: window.location.href, parent_url: window.location.href, referrer: document.referrer,
-        utm_params: mergeUtms(), source: 'hosted_form', form_slug: opcao.slug, form_id: opcao.id,
-        client_event_id: newClientEventId(), timestamp: new Date().toISOString()
-      };
-      var btn = document.getElementById('submitBtn');
-      submitting = true; btn.disabled = true;
-      var originalText = btn.value;
-      btn.value = 'Enviando...';
-      // nunca fica "Enviando..." para sempre: sem resposta em 15 s, avisa e libera o botão
-      var ctl = window.AbortController ? new AbortController() : null;
-      var limite = setTimeout(function(){ if (ctl) ctl.abort(); }, 15000);
-      fetch(TRACK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload),
-        credentials: 'omit',
-        signal: ctl ? ctl.signal : undefined
-      }).then(function(res){
-        clearTimeout(limite);
-        if (!res.ok) throw new Error('Falha no envio (' + res.status + ')');
-        return res.json().catch(function(){ return {}; });
-      }).then(function(body){
-        if (body && body.lead_skipped_reason === 'missing_email'){
-          showError('O lead não foi gravado: e-mail é obrigatório.');
-          submitting = false; btn.disabled = false; btn.value = originalText;
-          return;
-        }
-        if (body && body.lead_id) lastLeadId = body.lead_id;
-        lastLeadData = leadData;
-        window.location.href = appendCheckoutUrl(opcao.redirect, lastLeadId);
-      }).catch(function(err){
-        clearTimeout(limite);
-        console.error('Lead form error:', err);
-        showError('Não foi possível enviar agora. Tente novamente em instantes.');
-        submitting = false; btn.disabled = false; btn.value = originalText;
-      });
+    var SELLFLUX = {
+      '1': 'https://webhook.sellflux.app/v2/webhook/form/494173d4abc57fd7091da79ea08a5b6a',
+      '2': 'https://webhook.sellflux.app/v2/webhook/form/8906750f6e52df1e0f89abadb63fc8fb'
+    };
+    // Envio nativo para o Sellflux, que depois leva a pessoa ao checkout da Hotmart.
+    // Aqui só se monta o endereço de destino (com UTMs e dados já preenchidos) antes de enviar.
+    pcxForm.addEventListener('submit', function(){
+      if (!atual) return;
+      var fd = new FormData(pcxForm);
+      lastLeadData = { name: (fd.get('name') || '').toString(), email: (fd.get('email') || '').toString(), phone: (fd.get('phone') || '').toString() };
+      pcxForm.setAttribute('action', SELLFLUX[atual.op] + '?redirect_url=' + encodeURIComponent(appendCheckoutUrl(atual.redirect)));
+      submitting = true;
     });
 
     // Voltar do checkout: o navegador devolve a página como estava, com o envio "em andamento".
@@ -2476,7 +2435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       submitting = false;
       var b = document.getElementById('submitBtn');
       b.disabled = false;
-      b.value = 'FAZER PRÉ-INSCRIÇÃO GRATUITAMENTE';
+      b.value = 'CONTINUAR';
       hideError();
     }
     window.addEventListener('pageshow', function(){ liberarEnvio(); fecharPcx(); });
@@ -2484,7 +2443,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function abrirPcx(qual, origem){
       var d = destinos[qual];
       if (!d) return;
-      atual = d;
+      atual = d; atual.op = qual;
+      pcxForm.setAttribute('action', SELLFLUX[qual]);
       pcxOpcao.textContent = d.rotulo;
       hideError();
       voltarPara = origem || null;
